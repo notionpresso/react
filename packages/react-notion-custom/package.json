@@ -1,6 +1,6 @@
 {
   "name": "@notionpresso/react",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "private": false,
   "homepage": "https://notionpresso.com",
   "description": "This is wellmade React components for Notion Opensource",
