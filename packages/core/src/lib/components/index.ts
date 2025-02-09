@@ -15,6 +15,7 @@ import Code from "./code";
 import Todo from "./todo";
 import Table from "./table";
 import TableRow from "./table-row";
+import Fallback from "./fallback";
 
 export {
   Headings,
@@ -33,6 +34,7 @@ export {
   Code,
   Todo,
   Table,
+  Fallback,
 };
 
 export default {
@@ -55,4 +57,5 @@ export default {
   to_do: Todo,
   table: Table,
   table_row: TableRow,
+  fallback: Fallback,
 };
