@@ -1,6 +1,7 @@
 import React, { createContext, useContext, useMemo } from "react";
 import type { Block, ContextedBlock } from "./types";
 import components from "./components";
+import Fallback from "./components/fallback";
 
 type ComponentProvider = Record<string, React.ComponentType<any>> & {
   fallback?: React.ComponentType<any>;
@@ -13,7 +14,10 @@ type NotionProps = {
 };
 
 function Notion({ children, custom = {} }: NotionProps) {
-  const contextValue = useMemo(() => ({ ...components, ...custom }), [custom]);
+  const contextValue = useMemo(
+    () => ({ ...components, fallback: Fallback, ...custom }),
+    [custom],
+  );
 
   return (
     <NotionContext.Provider value={contextValue}>
