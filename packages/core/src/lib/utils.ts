@@ -1,4 +1,3 @@
-import katex from "katex";
 import romans from "romans";
 import type { ContextedBlock } from "./types";
 
@@ -33,9 +32,6 @@ export const getYoutubeId = (url: string): string | null => {
 
   return null;
 };
-
-export const renderEquation = (expression: string) =>
-  katex.renderToString(expression, { throwOnError: false });
 
 export class ListItemMarker {
   private resolvers: ((step: number) => string)[];
