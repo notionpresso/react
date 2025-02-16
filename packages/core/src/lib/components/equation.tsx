@@ -1,14 +1,23 @@
 /**
  * @link react-katex https://github.com/MatejBransky/react-katex?tab=readme-ov-file
  */
-import "katex/dist/katex.min.css";
 import TeX from "@matejmazur/react-katex";
 
 import { EquationArgs } from "../types";
 
-const Equation = ({ equation: { expression } }: EquationArgs) => {
+type EquationProps = EquationArgs & { inline?: boolean };
+
+const Equation = ({
+  equation: { expression },
+  inline = false,
+}: EquationProps) => {
   return (
-    <TeX className="notion-block notion-equation notion-equation-block">
+    <TeX
+      className={`notion-block notion-equation ${
+        inline ? " notion-equation-inline" : "notion-equation-block"
+      }`}
+      block={!inline}
+    >
       {expression}
     </TeX>
   );
