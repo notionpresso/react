@@ -1328,3 +1328,17 @@
   margin-right: 6px;
   font-family: monaco, "Andale Mono", "Ubuntu Mono", monospace;
 }
+
+.notionpresso-tweet {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+.notion-embed-tweet-content {
+  width: fit-content;
+  height: fit-content;
+  border: none;
+}

@@ -1,0 +1,222 @@
+{
+  "object": "page",
+  "id": "1999c395-c2fb-809a-957e-f8556877bd8c",
+  "created_time": "2025-02-13T12:28:00.000Z",
+  "last_edited_time": "2025-03-24T21:18:00.000Z",
+  "created_by": {
+    "object": "user",
+    "id": "52c52d67-2221-4853-bae4-9687a30c395a"
+  },
+  "last_edited_by": {
+    "object": "user",
+    "id": "52c52d67-2221-4853-bae4-9687a30c395a"
+  },
+  "cover": null,
+  "icon": null,
+  "parent": {
+    "type": "workspace",
+    "workspace": true
+  },
+  "archived": false,
+  "in_trash": false,
+  "properties": {
+    "title": {
+      "id": "title",
+      "type": "title",
+      "title": [
+        {
+          "type": "text",
+          "text": {
+            "content": "Outer",
+            "link": null
+          },
+          "annotations": {
+            "bold": false,
+            "italic": false,
+            "strikethrough": false,
+            "underline": false,
+            "code": false,
+            "color": "default"
+          },
+          "plain_text": "Outer",
+          "href": null
+        }
+      ]
+    }
+  },
+  "url": "https://www.notion.so/Outer-1999c395c2fb809a957ef8556877bd8c",
+  "public_url": null,
+  "request_id": "be0efcfb-9011-4c8a-a7f8-865fae6a94f2",
+  "blocks": [
+    {
+      "object": "block",
+      "id": "1c09c395-c2fb-807a-8274-d0616599e043",
+      "parent": {
+        "type": "page_id",
+        "page_id": "1999c395-c2fb-809a-957e-f8556877bd8c"
+      },
+      "created_time": "2025-03-24T14:50:00.000Z",
+      "last_edited_time": "2025-03-24T14:50:00.000Z",
+      "created_by": {
+        "object": "user",
+        "id": "52c52d67-2221-4853-bae4-9687a30c395a"
+      },
+      "last_edited_by": {
+        "object": "user",
+        "id": "52c52d67-2221-4853-bae4-9687a30c395a"
+      },
+      "has_children": false,
+      "archived": false,
+      "in_trash": false,
+      "type": "paragraph",
+      "paragraph": {
+        "rich_text": [],
+        "color": "default"
+      },
+      "blocks": []
+    },
+    {
+      "object": "block",
+      "id": "1c09c395-c2fb-80f5-8219-f1a84e5aa007",
+      "parent": {
+        "type": "page_id",
+        "page_id": "1999c395-c2fb-809a-957e-f8556877bd8c"
+      },
+      "created_time": "2025-03-24T21:18:00.000Z",
+      "last_edited_time": "2025-03-24T21:18:00.000Z",
+      "created_by": {
+        "object": "user",
+        "id": "52c52d67-2221-4853-bae4-9687a30c395a"
+      },
+      "last_edited_by": {
+        "object": "user",
+        "id": "52c52d67-2221-4853-bae4-9687a30c395a"
+      },
+      "has_children": false,
+      "archived": false,
+      "in_trash": false,
+      "type": "paragraph",
+      "paragraph": {
+        "rich_text": [],
+        "color": "default"
+      },
+      "blocks": []
+    },
+    {
+      "object": "block",
+      "id": "1c09c395-c2fb-80f0-bf45-dacf84551519",
+      "parent": {
+        "type": "page_id",
+        "page_id": "1999c395-c2fb-809a-957e-f8556877bd8c"
+      },
+      "created_time": "2025-03-24T21:18:00.000Z",
+      "last_edited_time": "2025-03-24T21:18:00.000Z",
+      "created_by": {
+        "object": "user",
+        "id": "52c52d67-2221-4853-bae4-9687a30c395a"
+      },
+      "last_edited_by": {
+        "object": "user",
+        "id": "52c52d67-2221-4853-bae4-9687a30c395a"
+      },
+      "has_children": false,
+      "archived": false,
+      "in_trash": false,
+      "type": "notionpresso_tweet",
+      "notionpresso_tweet": {
+        "url": "https://x.com/myjeong19/status/1898282942738448763",
+        "iframe_url": "https://platform.twitter.com/embed/Tweet.html?id=1898282942738448763&dnt=true&embedId=twitter-widget-0&frame=false&hideCard=false&hideThread=false&lang=en&theme=light&siteScreenName=NotionpressoHQ&widgetsVersion=2b959255e8896%3A1673658205745&width=100%25&features=eyJ0ZndfdGltZWxpbmVfbGlzdCI6eyJidWNrZXQiOltdLCJ2ZXJzaW9uIjpudWxsfSwidGZ3X2ZvbGxvd2VyX2NvdW50X3N1bnNldCI6eyJidWNrZXQiOnRydWUsInZlcnNpb24iOm51bGx9LCJ0ZndfdHdlZXRfZWRpdF9iYWNrZW5kIjp7ImJ1Y2tldCI6Im9uIiwidmVyc2lvbiI6bnVsbH0sInRmd19yZWZzcmNfc2Vzc2lvbiI6eyJidWNrZXQiOiJvbiIsInZlcnNpb24iOm51bGx9LCJ0ZndfZm9zbnJfc29mdF9pbnRlcnZlbnRpb25zX2VuYWJsZWQiOnsiYnVja2V0Ijoib24iLCJ2ZXJzaW9uIjpudWxsfSwidGZ3X21peGVkX21lZGlhXzE1ODk3Ijp7ImJ1Y2tldCI6InRyZWF0bWVudCIsInZlcnNpb24iOm51bGx9LCJ0ZndfdXNlX3Byb2ZpbGVfaW1hZ2Vfc2hhcGVfZW5hYmxlZCI6eyJidWNrZXQiOiJvbiIsInZlcnNpb24iOm51bGx9LCJ0ZndfdmlkZW9faGxzX2R5bmFtaWNfbWFuaWZlc3RzXzE1MDgyIjp7ImJ1Y2tldCI6InRydWVfYml0cmF0ZSIsInZlcnNpb24iOm51bGx9LCJ0ZndfbGVnYWN5X3RpbWVsaW5lX3N1bnNldCI6eyJidWNrZXQiOnRydWUsInZlcnNpb24iOm51bGx9LCJ0ZndfdHdlZXRfZWRpdF9mcm9udGVuZCI6eyJidWNrZXQiOiJvbiIsInZlcnNpb24iOm51bGx9fQ",
+        "source": "twitter",
+        "tweet_id": "1898282942738448763",
+        "html": "\n      <div class=\"notionpresso-tweet-container\" data-tweet-id=\"1898282942738448763\">\n        <iframe \n          id=\"twitter-widget-1898282942738448763\" \n          class=\"notionpresso-tweet-iframe\"\n          scrolling=\"no\" \n          frameborder=\"0\" \n          allowtransparency=\"true\" \n          allowfullscreen=\"true\" \n          style=\"position: static; visibility: visible; width: 420px; height: 592px; display: block; flex-grow: 1;\" \n          title=\"Twitter Tweet\" \n          src=\"https://platform.twitter.com/embed/Tweet.html?id=1898282942738448763&dnt=true&embedId=twitter-widget-0&frame=false&hideCard=false&hideThread=false&lang=en&theme=light&siteScreenName=NotionpressoHQ&widgetsVersion=2b959255e8896%3A1673658205745&width=100%25&features=eyJ0ZndfdGltZWxpbmVfbGlzdCI6eyJidWNrZXQiOltdLCJ2ZXJzaW9uIjpudWxsfSwidGZ3X2ZvbGxvd2VyX2NvdW50X3N1bnNldCI6eyJidWNrZXQiOnRydWUsInZlcnNpb24iOm51bGx9LCJ0ZndfdHdlZXRfZWRpdF9iYWNrZW5kIjp7ImJ1Y2tldCI6Im9uIiwidmVyc2lvbiI6bnVsbH0sInRmd19yZWZzcmNfc2Vzc2lvbiI6eyJidWNrZXQiOiJvbiIsInZlcnNpb24iOm51bGx9LCJ0ZndfZm9zbnJfc29mdF9pbnRlcnZlbnRpb25zX2VuYWJsZWQiOnsiYnVja2V0Ijoib24iLCJ2ZXJzaW9uIjpudWxsfSwidGZ3X21peGVkX21lZGlhXzE1ODk3Ijp7ImJ1Y2tldCI6InRyZWF0bWVudCIsInZlcnNpb24iOm51bGx9LCJ0ZndfdXNlX3Byb2ZpbGVfaW1hZ2Vfc2hhcGVfZW5hYmxlZCI6eyJidWNrZXQiOiJvbiIsInZlcnNpb24iOm51bGx9LCJ0ZndfdmlkZW9faGxzX2R5bmFtaWNfbWFuaWZlc3RzXzE1MDgyIjp7ImJ1Y2tldCI6InRydWVfYml0cmF0ZSIsInZlcnNpb24iOm51bGx9LCJ0ZndfbGVnYWN5X3RpbWVsaW5lX3N1bnNldCI6eyJidWNrZXQiOnRydWUsInZlcnNpb24iOm51bGx9LCJ0ZndfdHdlZXRfZWRpdF9mcm9udGVuZCI6eyJidWNrZXQiOiJvbiIsInZlcnNpb24iOm51bGx9fQ\" \n          data-tweet-id=\"1898282942738448763\">\n        </iframe>\n      </div>\n      \n<script id=\"notionpresso-tweet-theme-script\">\n  // 이미 스크립트가 로드된 경우 중복 실행 방지\n  if (!window.notionpressoTweetThemeInitialized) {\n    window.notionpressoTweetThemeInitialized = true;\n    \n    // 테마 감지 및 적용 함수\n    function updateTwitterEmbedThemes() {\n      const theme = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';\n      document.querySelectorAll('.notionpresso-tweet-iframe').forEach(iframe => {\n        let src = iframe.getAttribute('src');\n        if (src) {\n          if (src.includes('theme=')) {\n            src = src.replace(/theme=(dark|light)/, 'theme=' + theme);\n          } else {\n            src += '&theme=' + theme;\n          }\n          iframe.setAttribute('src', src);\n          iframe.parentElement?.setAttribute('data-theme', theme);\n        }\n      });\n    }\n    \n    // 초기 적용\n    updateTwitterEmbedThemes();\n    \n    // 시스템 테마 변경 감지\n    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', updateTwitterEmbedThemes);\n  }\n</script>\n",
+        "theme": "auto"
+      },
+      "blocks": []
+    },
+    {
+      "object": "block",
+      "id": "1999c395-c2fb-80c6-89d5-d70674c4018b",
+      "parent": {
+        "type": "page_id",
+        "page_id": "1999c395-c2fb-809a-957e-f8556877bd8c"
+      },
+      "created_time": "2025-02-13T12:28:00.000Z",
+      "last_edited_time": "2025-02-13T12:28:00.000Z",
+      "created_by": {
+        "object": "user",
+        "id": "52c52d67-2221-4853-bae4-9687a30c395a"
+      },
+      "last_edited_by": {
+        "object": "user",
+        "id": "52c52d67-2221-4853-bae4-9687a30c395a"
+      },
+      "has_children": false,
+      "archived": false,
+      "in_trash": false,
+      "type": "paragraph",
+      "paragraph": {
+        "rich_text": [],
+        "color": "default"
+      },
+      "blocks": []
+    },
+    {
+      "object": "block",
+      "id": "1c09c395-c2fb-8091-a690-db90d8283e97",
+      "parent": {
+        "type": "page_id",
+        "page_id": "1999c395-c2fb-809a-957e-f8556877bd8c"
+      },
+      "created_time": "2025-03-24T14:17:00.000Z",
+      "last_edited_time": "2025-03-24T14:18:00.000Z",
+      "created_by": {
+        "object": "user",
+        "id": "52c52d67-2221-4853-bae4-9687a30c395a"
+      },
+      "last_edited_by": {
+        "object": "user",
+        "id": "52c52d67-2221-4853-bae4-9687a30c395a"
+      },
+      "has_children": false,
+      "archived": false,
+      "in_trash": false,
+      "type": "notionpresso_tweet",
+      "notionpresso_tweet": {
+        "url": "https://x.com/myjeong19/status/1854475122901700921",
+        "iframe_url": "https://platform.twitter.com/embed/Tweet.html?id=1854475122901700921&dnt=true&embedId=twitter-widget-0&frame=false&hideCard=false&hideThread=false&lang=en&theme=light&siteScreenName=NotionpressoHQ&widgetsVersion=2b959255e8896%3A1673658205745&width=100%25&features=eyJ0ZndfdGltZWxpbmVfbGlzdCI6eyJidWNrZXQiOltdLCJ2ZXJzaW9uIjpudWxsfSwidGZ3X2ZvbGxvd2VyX2NvdW50X3N1bnNldCI6eyJidWNrZXQiOnRydWUsInZlcnNpb24iOm51bGx9LCJ0ZndfdHdlZXRfZWRpdF9iYWNrZW5kIjp7ImJ1Y2tldCI6Im9uIiwidmVyc2lvbiI6bnVsbH0sInRmd19yZWZzcmNfc2Vzc2lvbiI6eyJidWNrZXQiOiJvbiIsInZlcnNpb24iOm51bGx9LCJ0ZndfZm9zbnJfc29mdF9pbnRlcnZlbnRpb25zX2VuYWJsZWQiOnsiYnVja2V0Ijoib24iLCJ2ZXJzaW9uIjpudWxsfSwidGZ3X21peGVkX21lZGlhXzE1ODk3Ijp7ImJ1Y2tldCI6InRyZWF0bWVudCIsInZlcnNpb24iOm51bGx9LCJ0ZndfdXNlX3Byb2ZpbGVfaW1hZ2Vfc2hhcGVfZW5hYmxlZCI6eyJidWNrZXQiOiJvbiIsInZlcnNpb24iOm51bGx9LCJ0ZndfdmlkZW9faGxzX2R5bmFtaWNfbWFuaWZlc3RzXzE1MDgyIjp7ImJ1Y2tldCI6InRydWVfYml0cmF0ZSIsInZlcnNpb24iOm51bGx9LCJ0ZndfbGVnYWN5X3RpbWVsaW5lX3N1bnNldCI6eyJidWNrZXQiOnRydWUsInZlcnNpb24iOm51bGx9LCJ0ZndfdHdlZXRfZWRpdF9mcm9udGVuZCI6eyJidWNrZXQiOiJvbiIsInZlcnNpb24iOm51bGx9fQ",
+        "source": "twitter",
+        "tweet_id": "1854475122901700921",
+        "html": "\n      <div class=\"notionpresso-tweet-container\" data-tweet-id=\"1854475122901700921\">\n        <iframe \n          id=\"twitter-widget-1854475122901700921\" \n          class=\"notionpresso-tweet-iframe\"\n          scrolling=\"no\" \n          frameborder=\"0\" \n          allowtransparency=\"true\" \n          allowfullscreen=\"true\" \n          style=\"position: static; visibility: visible; width: 420px; height: 592px; display: block; flex-grow: 1;\" \n          title=\"Twitter Tweet\" \n          src=\"https://platform.twitter.com/embed/Tweet.html?id=1854475122901700921&dnt=true&embedId=twitter-widget-0&frame=false&hideCard=false&hideThread=false&lang=en&theme=light&siteScreenName=NotionpressoHQ&widgetsVersion=2b959255e8896%3A1673658205745&width=100%25&features=eyJ0ZndfdGltZWxpbmVfbGlzdCI6eyJidWNrZXQiOltdLCJ2ZXJzaW9uIjpudWxsfSwidGZ3X2ZvbGxvd2VyX2NvdW50X3N1bnNldCI6eyJidWNrZXQiOnRydWUsInZlcnNpb24iOm51bGx9LCJ0ZndfdHdlZXRfZWRpdF9iYWNrZW5kIjp7ImJ1Y2tldCI6Im9uIiwidmVyc2lvbiI6bnVsbH0sInRmd19yZWZzcmNfc2Vzc2lvbiI6eyJidWNrZXQiOiJvbiIsInZlcnNpb24iOm51bGx9LCJ0ZndfZm9zbnJfc29mdF9pbnRlcnZlbnRpb25zX2VuYWJsZWQiOnsiYnVja2V0Ijoib24iLCJ2ZXJzaW9uIjpudWxsfSwidGZ3X21peGVkX21lZGlhXzE1ODk3Ijp7ImJ1Y2tldCI6InRyZWF0bWVudCIsInZlcnNpb24iOm51bGx9LCJ0ZndfdXNlX3Byb2ZpbGVfaW1hZ2Vfc2hhcGVfZW5hYmxlZCI6eyJidWNrZXQiOiJvbiIsInZlcnNpb24iOm51bGx9LCJ0ZndfdmlkZW9faGxzX2R5bmFtaWNfbWFuaWZlc3RzXzE1MDgyIjp7ImJ1Y2tldCI6InRydWVfYml0cmF0ZSIsInZlcnNpb24iOm51bGx9LCJ0ZndfbGVnYWN5X3RpbWVsaW5lX3N1bnNldCI6eyJidWNrZXQiOnRydWUsInZlcnNpb24iOm51bGx9LCJ0ZndfdHdlZXRfZWRpdF9mcm9udGVuZCI6eyJidWNrZXQiOiJvbiIsInZlcnNpb24iOm51bGx9fQ\" \n          data-tweet-id=\"1854475122901700921\">\n        </iframe>\n      </div>\n      \n<script id=\"notionpresso-tweet-theme-script\">\n  // 이미 스크립트가 로드된 경우 중복 실행 방지\n  if (!window.notionpressoTweetThemeInitialized) {\n    window.notionpressoTweetThemeInitialized = true;\n    \n    // 테마 감지 및 적용 함수\n    function updateTwitterEmbedThemes() {\n      const theme = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';\n      document.querySelectorAll('.notionpresso-tweet-iframe').forEach(iframe => {\n        let src = iframe.getAttribute('src');\n        if (src) {\n          if (src.includes('theme=')) {\n            src = src.replace(/theme=(dark|light)/, 'theme=' + theme);\n          } else {\n            src += '&theme=' + theme;\n          }\n          iframe.setAttribute('src', src);\n          iframe.parentElement?.setAttribute('data-theme', theme);\n        }\n      });\n    }\n    \n    // 초기 적용\n    updateTwitterEmbedThemes();\n    \n    // 시스템 테마 변경 감지\n    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', updateTwitterEmbedThemes);\n  }\n</script>\n",
+        "theme": "auto"
+      },
+      "blocks": []
+    },
+    {
+      "object": "block",
+      "id": "1c09c395-c2fb-80d8-a370-c2e250f28823",
+      "parent": {
+        "type": "page_id",
+        "page_id": "1999c395-c2fb-809a-957e-f8556877bd8c"
+      },
+      "created_time": "2025-03-24T18:09:00.000Z",
+      "last_edited_time": "2025-03-24T18:09:00.000Z",
+      "created_by": {
+        "object": "user",
+        "id": "52c52d67-2221-4853-bae4-9687a30c395a"
+      },
+      "last_edited_by": {
+        "object": "user",
+        "id": "52c52d67-2221-4853-bae4-9687a30c395a"
+      },
+      "has_children": false,
+      "archived": false,
+      "in_trash": false,
+      "type": "paragraph",
+      "paragraph": {
+        "rich_text": [],
+        "color": "default"
+      },
+      "blocks": []
+    }
+  ]
+}

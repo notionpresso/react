@@ -213,3 +213,14 @@ export type BookmarkArgs = {
 export type SyncedBlockArgs = {
   type: "synced_block";
 };
+
+export type NotionpressoTweetArgs = {
+  type: "notionpresso_tweet";
+  notionpresso_tweet: {
+    url: string;
+    iframe_url: string;
+    source: string;
+    tweet_id: string;
+    html: string;
+  };
+};

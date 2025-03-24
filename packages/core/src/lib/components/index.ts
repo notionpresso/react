@@ -16,6 +16,7 @@ import Todo from "./todo";
 import Table from "./table";
 import TableRow from "./table-row";
 import Fallback from "./fallback";
+import Tweet from "./tweet";
 
 export {
   Headings,
@@ -35,6 +36,7 @@ export {
   Todo,
   Table,
   Fallback,
+  Tweet,
 };
 
 export default {
@@ -58,4 +60,5 @@ export default {
   table: Table,
   table_row: TableRow,
   fallback: Fallback,
+  notionpresso_tweet: Tweet,
 };
