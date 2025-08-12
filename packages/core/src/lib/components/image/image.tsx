@@ -1,8 +1,10 @@
-import React, { useState, useEffect } from "react";
-import type { ContextedBlock, ImageArgs } from "../../types";
+"use client";
+
+import React from "react";
+import type { ImageArgs } from "../../types";
 import RichText from "../internal/rich-text";
 import ImageViewer from "./image-viewer";
-import { getImgUrlOrNull } from "./lib";
+import { extractImageUrl } from "./lib";
 
 type ImageProps = {
   children: React.ReactNode;
@@ -13,42 +15,14 @@ const Image: React.FC<ImageProps> = ({ children, ...props }) => {
     image: { caption, type },
   } = props;
 
-  const url = getImgUrlOrNull(props);
-  const [urls, setUrls] = useState<string[]>([]);
-  const [currentImageIndex, setCurrentImageIndex] = useState(0);
-
-  useEffect(() => {
-    let startBlock: ContextedBlock = props;
-
-    while (startBlock.context.parent !== null) {
-      startBlock = startBlock.context.parent!;
-    }
-    while (startBlock.context.previous !== null) {
-      startBlock = startBlock.context.previous!;
-    }
-    const extract = (block: ContextedBlock) => {
-      const imgUrl = getImgUrlOrNull(block);
-      if (imgUrl && !urls.includes(imgUrl)) {
-        setUrls((prevUrls) => [...prevUrls, imgUrl]);
-      }
-      block.blocks.forEach(extract);
-      if (block.context.after) extract(block.context.after);
-    };
-
-    extract(startBlock);
-  }, [url, urls, props]);
+  const url = extractImageUrl(props);
 
   return (
     <>
       <figure className="notion-block notion-image">
         <div className="notion-image-content">
           {url ? (
-            <ImageViewer
-              url={url}
-              urls={urls}
-              currentImageIndex={currentImageIndex}
-              setCurrentImageIndex={setCurrentImageIndex}
-            >
+            <ImageViewer url={url}>
               <img src={url} alt="posting image" />
             </ImageViewer>
           ) : (

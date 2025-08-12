@@ -1,11 +1,14 @@
-import { useState, useEffect, useCallback } from "react";
+import { useEffect } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 
 import {
   useCursorVisibility,
-  useImageNavigation,
+  useNavigation,
   useImageScale,
   usePreventScroll,
+  useModal,
+  useImages,
+  useActiveIndex,
 } from "./hooks/image-viewer";
 
 import { getCursorStyle } from "./lib";
@@ -13,24 +16,23 @@ import { getCursorStyle } from "./lib";
 import ImageViewerTools from "./image-viewer-tools";
 
 type ImageViewerProps = {
-  children: React.ReactNode;
-  urls: string[];
   url: string;
-  currentImageIndex: number;
-  setCurrentImageIndex: React.Dispatch<React.SetStateAction<number>>;
+  children: React.ReactNode;
 };
 
-const ImageViewer: React.FC<ImageViewerProps> = ({
-  url,
-  urls,
-  children,
-  currentImageIndex,
-  setCurrentImageIndex,
-}) => {
-  const [isOpened, setIsOpened] = useState(false);
+const ImageViewer: React.FC<ImageViewerProps> = ({ url, children }) => {
+  const { isOpen, open, close } = useModal();
+  const { imageUrls, collectImages } = useImages();
+  const { activeImageIndex, setActiveImageIndex } = useActiveIndex(
+    url,
+    imageUrls,
+  );
 
-  const { toNextImage, toPreviousImage, hasNext, hasPrevious } =
-    useImageNavigation(currentImageIndex, setCurrentImageIndex, urls.length);
+  const { toNextImage, toPreviousImage, hasNext, hasPrevious } = useNavigation(
+    activeImageIndex,
+    imageUrls.length,
+    setActiveImageIndex,
+  );
 
   const {
     imageRef,
@@ -55,14 +57,14 @@ const ImageViewer: React.FC<ImageViewerProps> = ({
   const { isCursorVisible, handleMoveMouse } = useCursorVisibility();
 
   useEffect(() => {
-    if (currentImageIndex || isOpened) {
+    if (activeImageIndex || isOpen) {
       setScale(1);
       setDisplayScale(100);
     }
-  }, [isOpened, currentImageIndex, setScale, setDisplayScale]);
+  }, [isOpen, activeImageIndex, setScale, setDisplayScale]);
 
   useEffect(() => {
-    if (!isOpened) {
+    if (!isOpen) {
       return;
     }
 
@@ -70,7 +72,7 @@ const ImageViewer: React.FC<ImageViewerProps> = ({
 
     const handleKeyDown = (e: KeyboardEvent) => {
       const keyDownEvents: { [key: string]: () => void } = {
-        Escape: () => setIsOpened(false),
+        Escape: close,
         "+": handleScaleUp,
         "=": handleScaleUp,
         "-": handleScaleDown,
@@ -88,38 +90,33 @@ const ImageViewer: React.FC<ImageViewerProps> = ({
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [
     imageRef,
-    isOpened,
+    isOpen,
     handleScaleUp,
     handleScaleDown,
     toNextImage,
     toPreviousImage,
+    close,
   ]);
 
-  const handleImageClick = useCallback(
-    (clickedUrl: string) => {
-      const index = urls.findIndex((imgUrl) => imgUrl === clickedUrl);
-      if (index !== -1) {
-        setCurrentImageIndex(index);
-        setIsOpened(true);
-      }
-    },
-    [urls, setCurrentImageIndex, setIsOpened],
-  );
+  usePreventScroll(isOpen);
 
-  usePreventScroll(isOpened);
+  const handleViewerOpen = () => {
+    collectImages();
+    open();
+  };
 
   return (
     <>
       <button
         aria-haspopup="dialog"
         className="notion-viewer-opener"
-        onClick={() => handleImageClick(url)}
+        onClick={handleViewerOpen}
       >
         {children}
       </button>
 
       <AnimatePresence>
-        {isOpened && (
+        {isOpen && (
           <motion.div
             role="dialog"
             className={`notion-image-viewer-container`}
@@ -132,16 +129,16 @@ const ImageViewer: React.FC<ImageViewerProps> = ({
           >
             <button
               className="notion-image-viewer-overlay"
-              onClick={() => setIsOpened(false)}
+              onClick={close}
               style={{
                 cursor: isCursorVisible ? "default" : "none",
               }}
             />
             <motion.img
-              key={urls[currentImageIndex]}
+              key={imageUrls[activeImageIndex]}
               ref={imageRef}
               className={`notion-image-viewer-container-image`}
-              src={urls[currentImageIndex]}
+              src={imageUrls[activeImageIndex]}
               alt="posting image"
               style={{
                 transform: `scale(${scale})`,
@@ -153,13 +150,13 @@ const ImageViewer: React.FC<ImageViewerProps> = ({
 
             {(isCursorVisible || isScaleFocus) && (
               <ImageViewerTools
-                url={urls[currentImageIndex]}
-                currentImageIndex={currentImageIndex}
-                imageLength={urls.length}
+                url={imageUrls[activeImageIndex]}
+                currentImageIndex={activeImageIndex}
+                imageLength={imageUrls.length}
                 scaleInputRef={scaleInputRef}
                 scale={scale}
                 displayScale={displayScale}
-                setIsOpened={setIsOpened}
+                close={close}
                 onScaleUp={handleScaleUp}
                 onScaleDown={handleScaleDown}
                 isScaleFocus={isScaleFocus}

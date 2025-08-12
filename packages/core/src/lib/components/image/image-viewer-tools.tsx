@@ -11,7 +11,7 @@ type ImageViewerToolsProps = {
   currentImageIndex: number;
   imageLength: number;
   scaleInputRef: React.MutableRefObject<HTMLInputElement | null>;
-  setIsOpened: React.Dispatch<React.SetStateAction<boolean>>;
+  close: () => void;
   hasPrevious: boolean;
   hasNext: boolean;
   toPreviousImage: () => void;
@@ -35,14 +35,13 @@ const ImageViewerTools: React.FC<ImageViewerToolsProps> = ({
   scaleInputRef,
   hasPrevious,
   hasNext,
-  setIsOpened,
+  close,
   toPreviousImage,
   toNextImage,
   displayScale,
   onScaleUp,
   onScaleDown,
   isScaleFocus,
-  setIsScaleFocus,
   onScaleFocus,
   onScaleBlur,
   onScaleChange,
@@ -55,41 +54,47 @@ const ImageViewerTools: React.FC<ImageViewerToolsProps> = ({
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
     >
-      <div className="notion-image-viewer-controls">
-        <Tooltip
-          content="Back"
-          hint={`${currentImageIndex} of ${imageLength} `}
-          disabled={!hasPrevious}
-        >
-          <button
-            aria-label="image tools back button"
-            aria-disabled={!hasPrevious}
+      {imageLength > 1 && (
+        <div className="notion-image-viewer-controls">
+          <Tooltip
+            content="Back"
+            hint={`${currentImageIndex} of ${imageLength} `}
             disabled={!hasPrevious}
-            onClick={toPreviousImage}
           >
-            <img src={Icon.ArrowBack} alt="image tools back button" />
-          </button>
-        </Tooltip>
+            <button
+              aria-label="image tools back button"
+              aria-disabled={!hasPrevious}
+              disabled={!hasPrevious}
+              onClick={toPreviousImage}
+            >
+              <img src={Icon.ArrowBack} alt="image tools back button" />
+            </button>
+          </Tooltip>
 
-        <Tooltip
-          content="Next"
-          hint={`${currentImageIndex + 2} of ${imageLength} `}
-          disabled={!hasNext}
-        >
-          <button
-            aria-label="image tools next button"
-            aria-disabled={!hasNext}
+          <Tooltip
+            content="Next"
+            hint={`${currentImageIndex + 2} of ${imageLength} `}
             disabled={!hasNext}
-            onClick={toNextImage}
           >
-            <img src={Icon.ArrowForward} alt="image tools next button" />
-          </button>
-        </Tooltip>
-      </div>
+            <button
+              aria-label="image tools next button"
+              aria-disabled={!hasNext}
+              disabled={!hasNext}
+              onClick={toNextImage}
+            >
+              <img src={Icon.ArrowForward} alt="image tools next button" />
+            </button>
+          </Tooltip>
+        </div>
+      )}
 
       <div className="notion-image-viewer-scaler">
         <Tooltip content="Zoom out" hint="-">
-          <button aria-label="image zoom out button" onClick={onScaleDown}>
+          <button
+            aria-label="image zoom out button"
+            onClick={onScaleDown}
+            className="notion-image-viewer-tools-zoom-out"
+          >
             <img src={Icon.Minus} alt="image zoom out button" />
           </button>
         </Tooltip>
@@ -115,7 +120,7 @@ const ImageViewerTools: React.FC<ImageViewerToolsProps> = ({
         ) : (
           <button
             className="notion-image-viewer-scaler-input-button"
-            onClick={() => setIsScaleFocus(true)}
+            onClick={onScaleFocus}
           >
             <span>{displayScale}%</span>
           </button>
@@ -139,7 +144,7 @@ const ImageViewerTools: React.FC<ImageViewerToolsProps> = ({
         <button
           aria-label="image viewer close button"
           className="notion-image-viewer-tools-close"
-          onClick={() => setIsOpened(false)}
+          onClick={close}
         >
           <img src={Icon.Close} alt="image viewer close button" />
         </button>

@@ -1114,8 +1114,7 @@
 .notion-image-viewer-tools
   > .notion-image-viewer-controls
   > .notion-image-viewer-tooltip-container:first-child
-  button,
-.notion-image-viewer-tools > .notion-image-viewer-scaler button:first-child {
+  button {
   width: 36px;
   padding-left: 8px;
   border-top-left-radius: 4px;
@@ -1125,8 +1124,7 @@
 .notion-image-viewer-tools
   > .notion-image-viewer-controls
   > .notion-image-viewer-tooltip-container:last-child
-  button,
-.notion-image-viewer-tools > nav > button:last-child {
+  button {
   width: 36px;
   padding-right: 8px;
   border-top-right-radius: 4px;
@@ -1214,10 +1212,16 @@
   height: 100%;
 }
 .notion-image-viewer-tools button.notion-image-viewer-tools-download {
-  border-left: solid 1px white;
-  border-right: solid 1px white;
+  border-left: solid 1px #666;
+  border-right: solid 1px #666;
   opacity: 0.9;
 }
+
+.notion-image-viewer-tools button.notion-image-viewer-tools-zoom-out {
+  border-top-left-radius: 6px;
+  border-bottom-left-radius: 6px;
+}
+
 .notion-image-viewer-tools button.notion-image-viewer-tools-close {
   width: 36px;
   padding-right: 8px;
