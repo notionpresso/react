@@ -1062,19 +1062,13 @@
   flex-direction: column;
 }
 
-.notion-viewer-opener,
-.notion-image-viewer-overlay {
+.notion-viewer-opener {
   background: none;
   border: none;
   padding: 0;
   margin: 0;
-  width: auto;
-  height: auto;
-  overflow: visible;
-  text-align: left;
-  color: inherit;
-  font: inherit;
-  line-height: normal;
+  -webkit-appearance: none;
+  appearance: none;
   -webkit-font-smoothing: inherit;
   -moz-osx-font-smoothing: inherit;
   -webkit-appearance: none;
