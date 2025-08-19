@@ -1067,160 +1067,11 @@
   border: none;
   padding: 0;
   margin: 0;
+  cursor: pointer;
   -webkit-appearance: none;
   appearance: none;
   -webkit-font-smoothing: inherit;
   -moz-osx-font-smoothing: inherit;
-  -webkit-appearance: none;
-  appearance: none;
-}
-
-.notion-image-viewer-tools button {
-  background-color: #060606c4;
-  padding: 6px;
-  width: 32px;
-  height: 32px;
-  border: 0;
-  margin: 0;
-  user-select: none;
-  cursor: pointer;
-}
-
-.notion-image-viewer-tools button > img {
-  cursor: pointer;
-}
-
-.notion-image-viewer-tools button:disabled {
-  pointer-events: none;
-  cursor: default;
-  background-color: #060606a1;
-}
-
-.notion-image-viewer-tools button:hover {
-  background-color: #060606a1;
-}
-
-.notion-image-viewer-tools > .notion-image-viewer-controls {
-  display: flex;
-  margin-right: 25px;
-}
-
-.notion-image-viewer-tools
-  > .notion-image-viewer-controls
-  > .notion-image-viewer-tooltip-container:first-child
-  button {
-  width: 36px;
-  padding-left: 8px;
-  border-top-left-radius: 4px;
-  border-bottom-left-radius: 4px;
-}
-
-.notion-image-viewer-tools
-  > .notion-image-viewer-controls
-  > .notion-image-viewer-tooltip-container:last-child
-  button {
-  width: 36px;
-  padding-right: 8px;
-  border-top-right-radius: 4px;
-  border-bottom-right-radius: 4px;
-}
-
-.notion-image-viewer-tools .notion-image-viewer-scaler {
-  display: flex;
-  font-size: 14px;
-}
-
-.notion-image-viewer-scaler-input {
-  background-color: #060606c4;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #888888;
-  width: 60px;
-  height: 32px;
-}
-
-.notion-image-viewer-scaler-input:hover {
-  background-color: #060606a1;
-  display: flex;
-  align-items: center;
-}
-
-.notion-image-viewer-scaler button {
-  width: 60;
-  padding: 5;
-}
-
-.notion-image-viewer-scaler input {
-  background-color: transparent;
-  border: 0;
-  font-size: inherit;
-  color: inherit;
-  padding: 0px;
-  padding-top: 1px;
-  overflow: hidden;
-  line-height: 1;
-  text-align: center;
-}
-
-.notion-image-viewer-scaler-input-button {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 60px !important;
-  color: #888888;
-}
-
-.notion-image-viewer-tools .notion-image-viewer-scaler input:focus {
-  color: white;
-  outline: 1px solid #2d75a0;
-  width: 28px;
-}
-/* Chrome, Safari, Edge, Opera */
-.notion-image-viewer-tools
-  .notion-image-viewer-scaler
-  input::-webkit-outer-spin-button,
-.notion-image-viewer-tools
-  .notion-image-viewer-scaler
-  input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  appearance: none;
-  margin: 0;
-}
-/* Firefox */
-.notion-image-viewer-tools .notion-image-viewer-scaler input[type="number"] {
-  -moz-appearance: textfield;
-  appearance: textfield;
-}
-
-.notion-image-viewer-tools .notion-image-viewer-scaler > button:first-of-type {
-  border-top-right-radius: 0;
-  border-bottom-right-radius: 0;
-}
-.notion-image-viewer-tools .notion-image-viewer-scaler > button:last-of-type {
-  border-top-left-radius: 0;
-  border-bottom-left-radius: 0;
-}
-.notion-image-viewer-tools button > img {
-  width: 100%;
-  height: 100%;
-}
-.notion-image-viewer-tools button.notion-image-viewer-tools-download {
-  border-left: solid 1px #666;
-  border-right: solid 1px #666;
-  opacity: 0.9;
-}
-
-.notion-image-viewer-tools button.notion-image-viewer-tools-zoom-out {
-  border-top-left-radius: 6px;
-  border-bottom-left-radius: 6px;
-}
-
-.notion-image-viewer-tools button.notion-image-viewer-tools-close {
-  width: 36px;
-  padding-right: 8px;
-  border-top-right-radius: 6px;
-  border-bottom-right-radius: 6px;
 }
 
 .notion-image-viewer-opener {
@@ -1252,30 +1103,25 @@
 .notion-image-viewer-overlay {
   position: fixed;
   inset: 0;
-  background-color: black;
-  opacity: 0.9;
+  background-color: rgba(15, 15, 15, 0.6);
   cursor: default;
   overscroll-behavior: contain;
   overflow: hidden;
   height: 100vh;
 }
 
-.notion-image-viewer-container-image {
+.notion-image-viewer-content {
+  position: relative;
+  max-width: fit-content;
+  max-height: 100%;
+}
+
+.notion-image-viewer-content > img {
   max-width: fit-content;
   max-height: 100%;
   object-fit: contain;
-  position: relative;
   z-index: 0;
   transform-origin: 0.4s ease-in-out;
-}
-
-.notion-image-viewer-tools {
-  display: flex;
-  position: absolute;
-  bottom: 30px;
-  left: 50%;
-  transform: translateX(-50%);
-  transition: 2s all ease-in-out;
 }
 
 .notion-image-viewer-tooltip-container {
@@ -1325,4 +1171,167 @@
   border-radius: 3px;
   margin-right: 6px;
   font-family: monaco, "Andale Mono", "Ubuntu Mono", monospace;
+}
+
+.notion-image-viewer-tools {
+  display: flex;
+  position: absolute;
+  bottom: -3px;
+  left: 50%;
+  transform: translateX(-50%);
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  line-height: 1.2;
+  opacity: 1;
+  transition: 2s all ease-in-out;
+  height: 28px;
+}
+
+.notion-image-viewer-tools button {
+  background: #000000a6;
+  user-select: none;
+  cursor: default;
+  display: inline-flex;
+  align-items: center;
+  width: 28px;
+  height: 28px;
+  white-space: nowrap;
+  font-size: 14px;
+  justify-content: center;
+  flex-shrink: 0;
+  line-height: 1.2;
+  min-width: 0px;
+  border: none;
+  fill: white;
+  cursor: pointer;
+}
+
+.notion-image-viewer-tools button:disabled {
+  pointer-events: none;
+  cursor: default;
+  fill: #bbbbbbdd;
+}
+
+.notion-image-viewer-tools .notion-tools-navigation {
+  display: flex;
+  margin-right: 10px;
+}
+
+.notion-image-viewer-tools .notion-tools-navigation-back {
+  border-top-left-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+
+.notion-image-viewer-tools .notion-tools-navigation-next {
+  border-top-right-radius: 4px;
+  border-bottom-right-radius: 4px;
+}
+
+.notion-image-viewer-tools .notion-tools-scaler {
+  display: flex;
+  font-size: 14px;
+}
+
+.notion-image-viewer-tools .notion-tools-scaler-container {
+  background: #000000a6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #888888;
+  width: 50px;
+  height: 28px;
+}
+
+.notion-image-viewer-tools .notion-tools-scaler-container input {
+  background: #000000a6;
+  border: 0;
+  padding: 0px;
+  font-size: inherit;
+  color: #fff;
+  text-align: center;
+  border-radius: 4px;
+  width: 28px;
+  font-size: 15px;
+}
+
+.notion-image-viewer-tools .notion-tools-scaler-container input + span {
+  width: 5px;
+}
+
+.notion-image-viewer-tools .notion-tools-scaler-container button {
+  background: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 42px;
+  color: #bbbbbbdd;
+}
+
+.notion-image-viewer-tools .notion-tools-scaler-container input:focus {
+  color: white;
+  outline: 0.8px solid #2d75a0;
+}
+
+.notion-image-viewer-tools
+  .notion-tools-scaler-container
+  input::-webkit-outer-spin-button,
+.notion-image-viewer-tools
+  .notion-tools-scaler-container
+  input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  appearance: none;
+  margin: 0;
+}
+.notion-image-viewer-tools .notion-tools-scaler-container input[type="number"] {
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
+
+.notion-image-viewer-tools button > svg {
+  width: 14px;
+  height: 100%;
+  display: block;
+  flex-shrink: 0;
+}
+.notion-image-viewer-tools
+  .notion-tools-scaler-container
+  button:disabled
+  > svg {
+  fill: #bbbbbbdd;
+}
+
+.notion-image-viewer-tools .notion-tools-download {
+  border-left: solid 0.05px #727272ae;
+  border-right: solid 0.05px #727272ae;
+}
+
+.notion-image-viewer-tools .notion-tools-scaler-zoom-out {
+  border-top-left-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+
+.notion-image-viewer-tools .notion-tools-close {
+  border-top-right-radius: 4px;
+  border-bottom-right-radius: 4px;
+}
+
+@media screen and (max-width: 768px) {
+  .notion-image-viewer-content {
+    max-width: 100%;
+    max-height: 100%;
+  }
+
+  .notion-image-viewer-content > img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+  }
+
+  .notion-image-viewer-tools {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
 }

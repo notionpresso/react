@@ -1,6 +1,8 @@
 import { useEffect } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 
+import { motionAnimate } from "./constants";
+
 import {
   useCursorVisibility,
   useNavigation,
@@ -9,11 +11,11 @@ import {
   useModal,
   useImages,
   useActiveIndex,
-} from "./hooks/image-viewer";
+} from "./hooks";
 
 import { getCursorStyle } from "./lib";
 
-import ImageViewerTools from "./image-viewer-tools";
+import ViewerTools from "./viewer-tools";
 
 type ImageViewerProps = {
   url: string;
@@ -119,58 +121,58 @@ const ImageViewer: React.FC<ImageViewerProps> = ({ url, children }) => {
         {isOpen && (
           <motion.div
             role="dialog"
-            className={`notion-image-viewer-container`}
+            className="notion-image-viewer-container"
             aria-modal="true"
             onMouseMove={handleMoveMouse}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
             tabIndex={-1}
+            {...motionAnimate}
           >
-            <button
+            <motion.div
               className="notion-image-viewer-overlay"
               onClick={close}
               style={{
                 cursor: isCursorVisible ? "default" : "none",
               }}
             />
-            <motion.img
-              key={imageUrls[activeImageIndex]}
-              ref={imageRef}
-              className={`notion-image-viewer-container-image`}
-              src={imageUrls[activeImageIndex]}
-              alt="posting image"
-              style={{
-                transform: `scale(${scale})`,
-                transformOrigin: `${scaleOriginX * 100}% ${scaleOriginY * 100}%`,
-                cursor: isCursorVisible ? getCursorStyle(scale) : "none",
-              }}
-              onClick={handleZoomInOut}
-            />
 
-            {(isCursorVisible || isScaleFocus) && (
-              <ImageViewerTools
-                url={imageUrls[activeImageIndex]}
-                currentImageIndex={activeImageIndex}
-                imageLength={imageUrls.length}
-                scaleInputRef={scaleInputRef}
-                scale={scale}
-                displayScale={displayScale}
-                close={close}
-                onScaleUp={handleScaleUp}
-                onScaleDown={handleScaleDown}
-                isScaleFocus={isScaleFocus}
-                setIsScaleFocus={setIsScaleFocus}
-                onScaleBlur={handleScaleBlur}
-                onScaleFocus={handleScaleFocus}
-                onScaleEnter={handleScaleEnter}
-                onScaleChange={handleScaleChange}
-                hasPrevious={hasPrevious}
-                hasNext={hasNext}
-                toPreviousImage={toPreviousImage}
-                toNextImage={toNextImage}
+            <div className="notion-image-viewer-content">
+              <motion.img
+                key={imageUrls[activeImageIndex]}
+                ref={imageRef}
+                src={imageUrls[activeImageIndex]}
+                alt="posting image"
+                style={{
+                  transform: `scale(${scale})`,
+                  transformOrigin: `${scaleOriginX * 100}% ${scaleOriginY * 100}%`,
+                  cursor: isCursorVisible ? getCursorStyle(scale) : "none",
+                }}
+                onClick={handleZoomInOut}
               />
-            )}
+
+              {(isCursorVisible || isScaleFocus) && (
+                <ViewerTools
+                  url={imageUrls[activeImageIndex]}
+                  currentImageIndex={activeImageIndex}
+                  imageLength={imageUrls.length}
+                  scaleInputRef={scaleInputRef}
+                  scale={scale}
+                  displayScale={displayScale}
+                  close={close}
+                  onScaleUp={handleScaleUp}
+                  onScaleDown={handleScaleDown}
+                  isScaleFocus={isScaleFocus}
+                  setIsScaleFocus={setIsScaleFocus}
+                  onScaleBlur={handleScaleBlur}
+                  onScaleFocus={handleScaleFocus}
+                  onScaleEnter={handleScaleEnter}
+                  onScaleChange={handleScaleChange}
+                  hasPrevious={hasPrevious}
+                  hasNext={hasNext}
+                  toPreviousImage={toPreviousImage}
+                  toNextImage={toNextImage}
+                />
+              )}
+            </div>
           </motion.div>
         )}
       </AnimatePresence>
