@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 
-import { getGapStyles, getGapWidth } from "../../lib";
+import { getGapStyles, getGapWidth } from "../lib";
 
 export const usePreventScroll = (isOpened: boolean) => {
   useEffect(() => {

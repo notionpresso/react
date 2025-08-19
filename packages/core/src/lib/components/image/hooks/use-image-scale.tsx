@@ -1,6 +1,6 @@
 import { useState, useRef, useCallback, useEffect } from "react";
 
-import { scaleRound } from "../../lib";
+import { scaleRound } from "../lib";
 
 export const useImageScale = () => {
   const [scale, setScale] = useState<number>(1);
