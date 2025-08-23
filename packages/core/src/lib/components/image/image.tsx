@@ -1,10 +1,11 @@
 "use client";
-
 import React from "react";
 import type { ImageArgs } from "../../types";
 import RichText from "../internal/rich-text";
 import ImageViewer from "./image-viewer";
 import { extractImageUrl } from "./lib";
+import { useModal } from "./hooks";
+import { findImageCaption } from "./lib/find-image-caption";
 
 type ImageProps = {
   children: React.ReactNode;
@@ -15,16 +16,33 @@ const Image: React.FC<ImageProps> = ({ children, ...props }) => {
     image: { caption, type },
   } = props;
 
-  const url = extractImageUrl(props);
+  const url = extractImageUrl(props) || "";
+  const { isOpen, open, close } = useModal();
+
+  const foundCaption =
+    props.blocks && props.blocks.length > 0
+      ? findImageCaption(props.blocks, url)
+      : null;
 
   return (
     <>
+      {isOpen && url && (
+        <ImageViewer
+          url={url}
+          close={close}
+          caption={foundCaption || "posting image"}
+        />
+      )}
+
       <figure className="notion-block notion-image">
         <div className="notion-image-content">
           {url ? (
-            <ImageViewer url={url}>
-              <img src={url} alt="posting image" />
-            </ImageViewer>
+            <img
+              src={url}
+              alt={caption[0]?.text?.content || "posting image"}
+              onClick={open}
+              className="notion-viewer-opener"
+            />
           ) : (
             <p>unsupported type: {type}</p>
           )}
