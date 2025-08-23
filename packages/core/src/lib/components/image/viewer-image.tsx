@@ -69,9 +69,7 @@ const ViewerImage: React.FC<ViewerImageProps> = ({
   });
 
   useEffect(() => {
-    if (activeIndex) {
-      scaleDispatch({ type: "reset" });
-    }
+    scaleDispatch({ type: "reset" });
   }, [activeIndex]);
 
   useKeydown({
