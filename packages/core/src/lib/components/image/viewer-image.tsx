@@ -113,13 +113,15 @@ const ViewerImage: React.FC<ViewerImageProps> = ({
           handleMouseLeave={handleMouseLeave}
           handleMouseEnter={handleMouseEnter}
         >
-          <ViewerTools.Navigation
-            key={`${url}-navigation`}
-            activeIndex={activeIndex}
-            totalImages={imageUrls.length}
-            toPreviousImage={toPreviousImage}
-            toNextImage={toNextImage}
-          />
+          {imageUrls.length > 1 && (
+            <ViewerTools.Navigation
+              key={`${url}-navigation`}
+              activeIndex={activeIndex}
+              totalImages={imageUrls.length}
+              toPreviousImage={toPreviousImage}
+              toNextImage={toNextImage}
+            />
+          )}
           <ViewerTools.Scaler
             key={`${url}-scaler`}
             isFocus={isFocus}
