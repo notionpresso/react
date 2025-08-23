@@ -1,19 +1,18 @@
+"use client";
 import { useEffect } from "react";
 
 import { getGapStyles, getGapWidth } from "../lib";
 
-export const usePreventScroll = (isOpened: boolean) => {
+export const usePreventScroll = () => {
   useEffect(() => {
     const styleElement = document.createElement("style");
 
-    if (isOpened) {
-      document.body.setAttribute("data-scroll-locked", "true");
-      const gap = getGapWidth();
+    document.body.setAttribute("data-scroll-locked", "true");
+    const gap = getGapWidth();
 
-      const scrollLockedStyles = getGapStyles(gap);
-      styleElement.textContent = scrollLockedStyles;
-      document.head.appendChild(styleElement);
-    }
+    const scrollLockedStyles = getGapStyles(gap);
+    styleElement.textContent = scrollLockedStyles;
+    document.head.appendChild(styleElement);
 
     return () => {
       document.body.removeAttribute("data-scroll-locked");
@@ -21,5 +20,5 @@ export const usePreventScroll = (isOpened: boolean) => {
         styleElement.parentNode.removeChild(styleElement);
       }
     };
-  }, [isOpened]);
+  }, []);
 };

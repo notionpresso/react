@@ -1,17 +1,14 @@
-import { useState, useCallback } from "react";
+"use client";
+import { useState, useEffect } from "react";
 
 import { getVisibleImages } from "../lib/get-visible-images";
 
 export const useImages = () => {
   const [imageUrls, setImageUrls] = useState<string[]>([]);
 
-  const collectImages = useCallback(() => {
-    const visibleImages = getVisibleImages();
-    setImageUrls(visibleImages);
+  useEffect(() => {
+    setImageUrls(getVisibleImages());
   }, []);
 
-  return {
-    imageUrls,
-    collectImages,
-  };
+  return imageUrls;
 };

@@ -1,3 +1,4 @@
+"use client";
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -11,16 +12,16 @@ interface AriaProps {
   disabled?: boolean;
 }
 
-interface TooltipProps {
+interface ToolsTooltipProps {
+  className?: string;
   content: string;
   icon: React.ReactNode;
-  className?: string;
   hint?: string;
   onClick: () => void;
   aria: AriaProps;
 }
 
-export const Tooltip: React.FC<TooltipProps> = ({
+const ToolsTooltip: React.FC<ToolsTooltipProps> = ({
   className,
   content,
   hint,
@@ -37,7 +38,7 @@ export const Tooltip: React.FC<TooltipProps> = ({
     <div
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
-      className={`notion-image-viewer-tooltip-container`}
+      className="notion-viewer-tooltip-container"
     >
       <button
         aria-label={aria.label}
@@ -52,7 +53,7 @@ export const Tooltip: React.FC<TooltipProps> = ({
         <AnimatePresence>
           {isVisible && (
             <motion.div
-              className={`notion-image-viewer-tooltip ${className}`}
+              className={`notion-viewer-tooltip ${className}`}
               initial="hidden"
               animate="visible"
               exit="hidden"
@@ -67,3 +68,5 @@ export const Tooltip: React.FC<TooltipProps> = ({
     </div>
   );
 };
+
+export default ToolsTooltip;
