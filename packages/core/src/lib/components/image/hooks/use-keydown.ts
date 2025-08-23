@@ -1,40 +1,27 @@
 "use client";
-import { useCallback, useEffect } from "react";
-
-import type { OriginAction, ScaleAction } from "../reducer";
+import { useEffect } from "react";
+import type { UseZoomControls } from "./use-zoom-controls";
 
 interface UseKeydownProps {
   close: () => void;
-  scaleDispatch: React.Dispatch<ScaleAction>;
-  originDispatch: React.Dispatch<OriginAction>;
+  zoomControls: UseZoomControls;
   toPreviousImage: () => void;
   toNextImage: () => void;
 }
 
 export const useKeydown = ({
   close,
-  scaleDispatch,
-  originDispatch,
+  zoomControls,
   toPreviousImage,
   toNextImage,
 }: UseKeydownProps) => {
-  const handleZoomIn = useCallback(() => {
-    originDispatch({ type: "reset" });
-    scaleDispatch({ type: "zoomIn" });
-  }, [originDispatch, scaleDispatch]);
-
-  const handleZoomOut = useCallback(() => {
-    originDispatch({ type: "reset" });
-    scaleDispatch({ type: "zoomOut" });
-  }, [originDispatch, scaleDispatch]);
-
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       const keyDownEvents: { [key: string]: () => void } = {
         Escape: close,
-        "+": handleZoomIn,
-        "=": handleZoomIn,
-        "-": handleZoomOut,
+        "+": zoomControls.handleZoomIn,
+        "=": zoomControls.handleZoomIn,
+        "-": zoomControls.handleZoomOut,
         ArrowLeft: toPreviousImage,
         ArrowRight: toNextImage,
       };
@@ -47,5 +34,5 @@ export const useKeydown = ({
 
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [close, handleZoomIn, handleZoomOut, toNextImage, toPreviousImage]);
+  }, [close, zoomControls, toNextImage, toPreviousImage]);
 };

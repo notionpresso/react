@@ -1,7 +1,7 @@
 "use client";
 import { useCallback, useEffect, useState } from "react";
 
-const NAVIGATION = {
+export const NAVIGATION = {
   START_INDEX: 0,
   MIN_INDEX: 0,
 

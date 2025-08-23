@@ -2,21 +2,34 @@
 import React, { useEffect, useRef } from "react";
 import { TOOLS_ACTIONS, TOOLS_ARIA_LABELS } from "./constants/viewer-tools";
 import { Icons } from "./icons";
-import { initialScale, type ScaleAction } from "./reducer";
+import {
+  initialScale,
+  OriginAction,
+  type ScaleAction,
+  initialOrigin,
+  DISPLAY as DISPLAY_STYLE,
+} from "./reducer";
+import type { UseZoomControls } from "./hooks/use-zoom-controls";
 import ToolsTooltip from "./tools-tooltip";
 
 export interface ToolsScalerProps {
   scaleState: typeof initialScale;
   scaleDispatch: React.Dispatch<ScaleAction>;
+  originDispatch: React.Dispatch<OriginAction>;
   isFocus: boolean;
   setIsFocus: React.Dispatch<React.SetStateAction<boolean>>;
+  lastMousePosition: typeof initialOrigin;
+  zoomControls: UseZoomControls;
 }
 
 const ToolsScaler: React.FC<ToolsScalerProps> = ({
   scaleState,
   scaleDispatch,
+  originDispatch,
   isFocus,
   setIsFocus,
+  lastMousePosition,
+  zoomControls,
 }) => {
   const scaleInputRef = useRef<HTMLInputElement>(null);
 
@@ -27,6 +40,13 @@ const ToolsScaler: React.FC<ToolsScalerProps> = ({
 
   const handleInputFocus = () => {
     scaleInputRef.current?.focus();
+
+    scaleDispatch({ type: "reset" });
+    originDispatch({
+      type: "zoomInOut",
+      payload: lastMousePosition,
+    });
+
     setIsFocus(true);
   };
 
@@ -39,9 +59,13 @@ const ToolsScaler: React.FC<ToolsScalerProps> = ({
 
   const handleInputEnter = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
+      if (DISPLAY_STYLE.INITIAL > scaleState.displayScale) {
+        originDispatch({ type: "reset" });
+      }
+
       scaleDispatch({ type: "enter" });
-      scaleInputRef.current?.blur();
       setIsFocus(false);
+      scaleInputRef.current?.blur();
     }
   };
 
@@ -59,7 +83,7 @@ const ToolsScaler: React.FC<ToolsScalerProps> = ({
         content={TOOLS_ACTIONS.ZOOM_OUT}
         hint="-"
         aria={{ label: TOOLS_ARIA_LABELS.ZOOM_OUT }}
-        onClick={() => scaleDispatch({ type: "zoomOut" })}
+        onClick={zoomControls.handleZoomOut}
         icon={<Icons.Minus />}
       />
 
@@ -95,7 +119,7 @@ const ToolsScaler: React.FC<ToolsScalerProps> = ({
         content={TOOLS_ACTIONS.ZOOM_IN}
         hint="+"
         aria={{ label: TOOLS_ARIA_LABELS.ZOOM_IN }}
-        onClick={() => scaleDispatch({ type: "zoomIn" })}
+        onClick={zoomControls.handleZoomIn}
         icon={<Icons.Plus />}
       />
     </div>

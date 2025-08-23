@@ -17,14 +17,14 @@ export type ScaleAction = {
   payload?: number;
 };
 
-const DISPLAY = {
+export const DISPLAY = {
   INITIAL: 100,
   STEP: 50,
   MIN: 50,
   MAX: 200,
 };
 
-const STYLE = {
+export const STYLE = {
   INITIAL: 1,
   STEP: 0.5,
   ZOOM_IN_STEP: 1.5,
@@ -32,7 +32,7 @@ const STYLE = {
   MAX_STEP: 2,
 };
 
-const CONVERSION = {
+export const CONVERSION = {
   PERCENT_FACTOR: 100,
 };
 
