@@ -39,7 +39,7 @@ function Text({ props }: { props: TextArgs }) {
   ].filter(Boolean);
 
   const renderText = (source: string): React.ReactNode => {
-    return types.reduce(
+    const wrapped = types.reduce(
       (acc, type) => {
         switch (type) {
           case "link":
@@ -64,6 +64,29 @@ function Text({ props }: { props: TextArgs }) {
       },
       <span className={`${getColorCss(color)} notion-span`}>{source}</span>,
     );
+
+    if (href) {
+      const isExternalLink =
+        href &&
+        !href.startsWith("/") &&
+        !href.includes(window.location.hostname);
+      return isExternalLink ? (
+        <a
+          href={href}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="notion-link notion-link-external"
+        >
+          {wrapped} <span className="notion-external-icon">↗</span>
+        </a>
+      ) : (
+        <a href={href} className="notion-link">
+          {wrapped}
+        </a>
+      );
+    }
+
+    return wrapped;
   };
 
   return <>{renderText(content)}</>;
