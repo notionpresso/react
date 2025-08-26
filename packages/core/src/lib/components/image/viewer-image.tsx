@@ -9,7 +9,7 @@ import React, {
 
 import { motion } from "framer-motion";
 
-import { useNavigation, useImages, NAVIGATION } from "./hooks";
+import { useNavigation, useImages } from "./hooks";
 
 import { getCursorStyle } from "./lib";
 import { MOTION_STYLES } from "./constants";
@@ -118,6 +118,8 @@ const ViewerImage: React.FC<ViewerImageProps> = ({
       setLastMousePosition,
     ],
   );
+  const isViewerTools = isCursor || isFocus;
+  const isViewerNavigation = imageUrls.length > 1;
 
   return (
     <div className="notion-viewer-content">
@@ -137,12 +139,12 @@ const ViewerImage: React.FC<ViewerImageProps> = ({
         aria-label={`Image ${activeIndex + 1}/${imageUrls.length} at ${scaleState.displayScale}%`}
         {...MOTION_STYLES}
       />
-      {(isCursor || isFocus) && (
+      {isViewerTools && (
         <ViewerTools
           handleMouseLeave={handleMouseLeave}
           handleMouseEnter={handleMouseEnter}
         >
-          {imageUrls.length > NAVIGATION.MIN_INDEX && (
+          {isViewerNavigation && (
             <ViewerTools.Navigation
               key={`${url}-navigation`}
               activeIndex={activeIndex}

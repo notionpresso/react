@@ -15,4 +15,21 @@ export const TOOLS_ARIA_LABELS = {
   DOWNLOAD: "image download button",
   CLOSE: "image viewer close button",
   SCALER_INPUT: "scaler input",
+  IMAGE_VIEWER: "image viewer container",
+  TOOLTIP_DESCRIPTION: "tooltip description",
+} as const;
+
+export const TOOLS_ARIA_CONTROLS = {
+  IMAGE_VIEWER: "image-viewer-container",
+  ZOOM_CONTROLS: "zoom-controls-panel",
+  NAVIGATION_PANEL: "navigation-panel",
+} as const;
+
+export const TOOLS_ARIA_DESCRIBEDBY = {
+  ZOOM_OUT: "zoom-out-description",
+  ZOOM_IN: "zoom-in-description",
+  DOWNLOAD: "download-description",
+  CLOSE: "close-description",
+  BACK: "back-description",
+  NEXT: "next-description",
 } as const;

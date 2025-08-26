@@ -24,9 +24,12 @@ const Image: React.FC<ImageProps> = ({ children, ...props }) => {
       ? findImageCaption(props.blocks, url)
       : null;
 
+  const isViewer = url && isOpen;
+  const isCaption = caption.length !== 0;
+
   return (
     <>
-      {isOpen && url && (
+      {isViewer && (
         <ImageViewer
           url={url}
           close={close}
@@ -48,7 +51,7 @@ const Image: React.FC<ImageProps> = ({ children, ...props }) => {
           )}
         </div>
 
-        {caption.length !== 0 && (
+        {isCaption && (
           <figcaption className="notion-asset-caption">
             <RichText props={caption} />
           </figcaption>

@@ -8,8 +8,6 @@ import ToolsNavigation, { type ToolsNavigationProps } from "./tools-navigation";
 import ToolsDownload, { type ToolsDownloadProps } from "./tools-download";
 import ToolsClose, { type ToolsCloseProps } from "./tools-close";
 
-// const DISABLED_IMAGE_LENGTH = 1;
-
 interface ViewerToolsProps {
   children: React.ReactNode;
   handleMouseLeave: () => void;

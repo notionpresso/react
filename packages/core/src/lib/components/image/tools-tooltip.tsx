@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
-const variants = {
+const MOTION_VARIANTS = {
   hidden: { opacity: 0, y: -5 },
   visible: { opacity: 1, y: 0 },
 };
@@ -57,7 +57,7 @@ const ToolsTooltip: React.FC<ToolsTooltipProps> = ({
               initial="hidden"
               animate="visible"
               exit="hidden"
-              variants={variants}
+              variants={MOTION_VARIANTS}
             >
               <p>{content}</p>
               {hint && <p>{hint}</p>}
