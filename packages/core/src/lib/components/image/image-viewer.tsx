@@ -1,12 +1,13 @@
 "use client";
 import React from "react";
 
-import { AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 
 import ViewerOverlay from "./viewer-overlay";
 import ViewerImage from "./viewer-image";
 
 import { useCursorVisibility, usePreventScroll } from "./hooks";
+import { MOTION_STYLES } from "./constants";
 
 type ImageViewerProps = {
   url: string;
@@ -22,7 +23,7 @@ const ImageViewer: React.FC<ImageViewerProps> = ({ url, caption, close }) => {
 
   return (
     <AnimatePresence>
-      <div className="notion-viewer-container">
+      <motion.div className="notion-viewer-container" {...MOTION_STYLES}>
         <ViewerOverlay
           key={`${url}-overlay`}
           close={close}
@@ -37,7 +38,7 @@ const ImageViewer: React.FC<ImageViewerProps> = ({ url, caption, close }) => {
           caption={caption}
           close={close}
         />
-      </div>
+      </motion.div>
     </AnimatePresence>
   );
 };

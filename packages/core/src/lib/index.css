@@ -1083,8 +1083,8 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  padding-top: 32px;
-  padding-bottom: 32px;
+  transition: transform 0.08s ease-in-out;
+  height: 100vh;
 }
 
 @media screen and (min-width: 768px) {
@@ -1106,18 +1106,20 @@
   justify-content: center;
   align-items: center;
   overscroll-behavior: contain;
+  transition: transform 0.08s ease-in-out;
 }
 
 .notion-viewer-content {
   position: relative;
-  width: auto;
-  height: auto;
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 15;
-  max-width: 100%;
-  max-height: 100%;
+  width: auto;
+  height: auto;
+  z-index: 100;
+  overflow: visible;
+  transition: transform 0.2s ease-in-out;
+  transform-origin: center;
 }
 
 .notion-viewer-content > img {
@@ -1126,13 +1128,13 @@
   object-fit: contain;
   object-position: center;
   z-index: 0;
-  transition: transform 0.4s ease-in-out;
+  transform-origin: center;
 }
 
 .notion-viewer-tools {
   display: flex;
   position: fixed;
-  bottom: 30px;
+  bottom: 5%;
   left: 50%;
   transform: translateX(-50%);
   align-items: center;
@@ -1140,8 +1142,9 @@
   font-size: 14px;
   line-height: 1.2;
   opacity: 1;
-  transition: 2s all ease-in-out;
+  transition: 0.2s all ease-in-out;
   height: 28px;
+  z-index: 105;
 }
 
 .notion-viewer-tools button {
@@ -1166,7 +1169,10 @@
 .notion-viewer-tools button:disabled {
   pointer-events: none;
   cursor: default;
-  fill: #bbbbbbdd;
+}
+
+.notion-viewer-tools button:disabled svg {
+  opacity: 0.4;
 }
 
 .notion-viewer-tools .notion-tools-navigation {
@@ -1250,9 +1256,6 @@
   display: block;
   flex-shrink: 0;
 }
-.notion-viewer-tools .notion-tools-scaler-container button:disabled > svg {
-  fill: #bbbbbbdd;
-}
 
 .notion-viewer-tools .notion-tools-download {
   border-left: solid 0.05px #727272ae;
@@ -1279,6 +1282,10 @@
     max-width: 100%;
     max-height: 100%;
     object-fit: contain;
+  }
+
+  .notion-viewer-tools {
+    bottom: 30px;
   }
 }
 

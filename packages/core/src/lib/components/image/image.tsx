@@ -3,13 +3,14 @@ import React from "react";
 import type { ImageArgs } from "../../types";
 import RichText from "../internal/rich-text";
 import ImageViewer from "./image-viewer";
-import { extractImageUrl } from "./lib";
 import { useModal } from "./hooks";
-import { findImageCaption } from "./lib/find-image-caption";
+import { extractImageUrl, findImageCaption } from "./lib";
 
 type ImageProps = {
   children: React.ReactNode;
 } & ImageArgs;
+
+const DEFAULT_CAPTION = "posting image";
 
 const Image: React.FC<ImageProps> = ({ children, ...props }) => {
   const {
@@ -33,7 +34,7 @@ const Image: React.FC<ImageProps> = ({ children, ...props }) => {
         <ImageViewer
           url={url}
           close={close}
-          caption={foundCaption || "posting image"}
+          caption={foundCaption || DEFAULT_CAPTION}
         />
       )}
 
@@ -42,7 +43,7 @@ const Image: React.FC<ImageProps> = ({ children, ...props }) => {
           {url ? (
             <img
               src={url}
-              alt={caption[0]?.text?.content || "posting image"}
+              alt={caption[0]?.text?.content || DEFAULT_CAPTION}
               onClick={open}
               className="notion-viewer-opener"
             />

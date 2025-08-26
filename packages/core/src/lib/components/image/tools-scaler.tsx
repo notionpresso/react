@@ -1,16 +1,19 @@
 "use client";
 import React, { useEffect, useRef } from "react";
-import { TOOLS_ACTIONS, TOOLS_ARIA_LABELS } from "./constants/viewer-tools";
-import { Icons } from "./icons";
 import {
   initialScale,
   OriginAction,
   type ScaleAction,
-  initialOrigin,
   DISPLAY as DISPLAY_STYLE,
 } from "./reducer";
 import type { UseZoomControls } from "./hooks/use-zoom-controls";
 import ToolsTooltip from "./tools-tooltip";
+import { Icons } from "./icons";
+import {
+  TOOLS_ACTIONS,
+  TOOLS_ARIA_DESCRIBEDBY,
+  TOOLS_ARIA_LABELS,
+} from "./constants";
 
 export interface ToolsScalerProps {
   scaleState: typeof initialScale;
@@ -18,7 +21,6 @@ export interface ToolsScalerProps {
   originDispatch: React.Dispatch<OriginAction>;
   isFocus: boolean;
   setIsFocus: React.Dispatch<React.SetStateAction<boolean>>;
-  lastMousePosition: typeof initialOrigin;
   zoomControls: UseZoomControls;
 }
 
@@ -28,7 +30,6 @@ const ToolsScaler: React.FC<ToolsScalerProps> = ({
   originDispatch,
   isFocus,
   setIsFocus,
-  lastMousePosition,
   zoomControls,
 }) => {
   const scaleInputRef = useRef<HTMLInputElement>(null);
@@ -40,13 +41,7 @@ const ToolsScaler: React.FC<ToolsScalerProps> = ({
 
   const handleInputFocus = () => {
     scaleInputRef.current?.focus();
-
     scaleDispatch({ type: "reset" });
-    originDispatch({
-      type: "zoomInOut",
-      payload: lastMousePosition,
-    });
-
     setIsFocus(true);
   };
 
@@ -76,13 +71,20 @@ const ToolsScaler: React.FC<ToolsScalerProps> = ({
     }
   }, [isFocus]);
 
+  const isZoomIn = scaleState.displayScale === DISPLAY_STYLE.MAX;
+  const isZoomOut = scaleState.displayScale === DISPLAY_STYLE.MIN;
+
   return (
     <div className="notion-tools-scaler">
       <ToolsTooltip
         className="notion-tools-scaler-zoom-out"
         content={TOOLS_ACTIONS.ZOOM_OUT}
         hint="-"
-        aria={{ label: TOOLS_ARIA_LABELS.ZOOM_OUT }}
+        aria={{
+          label: TOOLS_ARIA_LABELS.ZOOM_OUT,
+          disabled: isZoomOut,
+          describedby: TOOLS_ARIA_DESCRIBEDBY.ZOOM_OUT,
+        }}
         onClick={zoomControls.handleZoomOut}
         icon={<Icons.Minus />}
       />
@@ -104,6 +106,8 @@ const ToolsScaler: React.FC<ToolsScalerProps> = ({
               onChange={handleInputChange}
               onKeyDown={handleInputEnter}
               autoFocus
+              aria-label={TOOLS_ARIA_LABELS.SCALER_INPUT}
+              aria-disabled={isFocus}
             />
             <span>%</span>
           </>
@@ -118,7 +122,11 @@ const ToolsScaler: React.FC<ToolsScalerProps> = ({
         className="notion-tools-scaler-zoom-in"
         content={TOOLS_ACTIONS.ZOOM_IN}
         hint="+"
-        aria={{ label: TOOLS_ARIA_LABELS.ZOOM_IN }}
+        aria={{
+          label: TOOLS_ARIA_LABELS.ZOOM_IN,
+          disabled: isZoomIn,
+          describedby: TOOLS_ARIA_DESCRIBEDBY.ZOOM_IN,
+        }}
         onClick={zoomControls.handleZoomIn}
         icon={<Icons.Plus />}
       />

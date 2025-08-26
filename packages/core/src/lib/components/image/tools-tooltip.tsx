@@ -10,6 +10,8 @@ const MOTION_VARIANTS = {
 interface AriaProps {
   label: string;
   disabled?: boolean;
+  describedby?: string;
+  controls?: string;
 }
 
 interface ToolsTooltipProps {
@@ -43,6 +45,10 @@ const ToolsTooltip: React.FC<ToolsTooltipProps> = ({
       <button
         aria-label={aria.label}
         aria-disabled={aria.disabled}
+        aria-describedby={aria.describedby}
+        aria-controls={aria.controls}
+        role="button"
+        tabIndex={0}
         disabled={aria.disabled}
         onClick={onClick}
         className={className}

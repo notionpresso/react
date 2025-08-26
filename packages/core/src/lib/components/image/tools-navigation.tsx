@@ -2,7 +2,11 @@
 import React from "react";
 import ToolsTooltip from "./tools-tooltip";
 
-import { TOOLS_ACTIONS, TOOLS_ARIA_LABELS } from "./constants/viewer-tools";
+import {
+  TOOLS_ACTIONS,
+  TOOLS_ARIA_LABELS,
+  TOOLS_ARIA_DESCRIBEDBY,
+} from "./constants";
 import { Icons } from "./icons";
 
 const NEXT_IMAGE_INDEX = 2;
@@ -31,6 +35,7 @@ const ToolsNavigation: React.FC<ToolsNavigationProps> = ({
         aria={{
           label: TOOLS_ARIA_LABELS.BACK,
           disabled: !hasPrevious,
+          describedby: TOOLS_ARIA_DESCRIBEDBY.BACK,
         }}
         onClick={toPreviousImage}
         icon={<Icons.ArrowBack />}
@@ -43,6 +48,7 @@ const ToolsNavigation: React.FC<ToolsNavigationProps> = ({
         aria={{
           label: TOOLS_ARIA_LABELS.NEXT,
           disabled: !hasNext,
+          describedby: TOOLS_ARIA_DESCRIBEDBY.NEXT,
         }}
         onClick={toNextImage}
         icon={<Icons.ArrowForward />}

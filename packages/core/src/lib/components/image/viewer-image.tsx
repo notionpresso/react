@@ -1,31 +1,28 @@
 "use client";
-import React, {
-  useCallback,
-  useEffect,
-  useReducer,
-  useRef,
-  useState,
-} from "react";
+import React, { useReducer, useRef, useState } from "react";
 
 import { motion } from "framer-motion";
 
-import { useNavigation, useImages } from "./hooks";
-
-import { getCursorStyle } from "./lib";
-import { MOTION_STYLES } from "./constants";
-
-import ViewerTools from "./viewer-tools";
 import {
   initialOrigin,
   initialScale,
   originReducer,
   scaleReducer,
-  STYLE as SCALE_STYLE,
-  DISPLAY as DISPLAY_STYLE,
   CONVERSION,
 } from "./reducer";
-import { useKeydown } from "./hooks/use-keydown";
-import { useZoomControls } from "./hooks/use-zoom-controls";
+
+import {
+  useNavigation,
+  useImages,
+  useKeydown,
+  useZoomControls,
+  useImageSize,
+} from "./hooks";
+
+import { getCursorStyle } from "./lib";
+import { MOTION_STYLES } from "./constants";
+
+import ViewerTools from "./viewer-tools";
 
 interface ViewerImageProps {
   url: string;
@@ -45,15 +42,10 @@ const ViewerImage: React.FC<ViewerImageProps> = ({
   handleMouseEnter,
 }) => {
   const imageRef = useRef<HTMLImageElement | null>(null);
+
   const [isFocus, setIsFocus] = useState(false);
-  const [lastMousePosition, setLastMousePosition] = useState(initialOrigin);
 
-  const imageUrls = useImages();
-
-  const { activeIndex, toNextImage, toPreviousImage } = useNavigation(
-    url,
-    imageUrls,
-  );
+  const visibleImages = useImages();
 
   const [scaleState, scaleDispatch] = useReducer(scaleReducer, initialScale);
   const [originState, originDispatch] = useReducer(
@@ -61,16 +53,20 @@ const ViewerImage: React.FC<ViewerImageProps> = ({
     initialOrigin,
   );
 
+  const { activeIndex, toNextImage, toPreviousImage } = useNavigation(
+    url,
+    visibleImages,
+    scaleDispatch,
+    originDispatch,
+  );
+
+  const { maxWidth, maxHeight } = useImageSize(imageRef, activeIndex);
+
   const zoomControls = useZoomControls({
     scaleState,
     originDispatch,
-    lastMousePosition,
     scaleDispatch,
   });
-
-  useEffect(() => {
-    scaleDispatch({ type: "reset" });
-  }, [activeIndex]);
 
   useKeydown({
     close,
@@ -79,67 +75,36 @@ const ViewerImage: React.FC<ViewerImageProps> = ({
     toNextImage,
   });
 
-  const handleZoomInOut = useCallback(
-    (event: React.MouseEvent<HTMLImageElement>) => {
-      if (!imageRef.current) {
-        return;
-      }
-
-      const { width, height, top, left } =
-        imageRef.current.getBoundingClientRect();
-      const currentMouseX = (event.clientX - left) / width;
-      const currentMouseY = (event.clientY - top) / height;
-
-      setLastMousePosition({
-        originX: currentMouseX,
-        originY: currentMouseY,
-      });
-
-      if (scaleState.displayScale === DISPLAY_STYLE.MIN) {
-        return scaleDispatch({ type: "zoomIn" });
-      }
-
-      if (scaleState.styleScale > SCALE_STYLE.INITIAL) {
-        scaleDispatch({ type: "zoomInOut" });
-      } else {
-        originDispatch({
-          type: "zoomInOut",
-          payload: { originX: currentMouseX, originY: currentMouseY },
-        });
-        scaleDispatch({ type: "zoomInOut" });
-      }
-    },
-    [
-      imageRef,
-      originDispatch,
-      scaleDispatch,
-      scaleState.styleScale,
-      scaleState.displayScale,
-      setLastMousePosition,
-    ],
-  );
-  const isViewerTools = isCursor || isFocus;
-  const isViewerNavigation = imageUrls.length > 1;
+  const isTools = isCursor || isFocus;
+  const isViewerNavigation = visibleImages.length > 1;
 
   return (
-    <div className="notion-viewer-content">
-      <motion.img
-        role="button"
-        tabIndex={0}
-        key={`${activeIndex}-${imageUrls[activeIndex]}-image`}
-        ref={imageRef}
-        alt={caption}
-        src={imageUrls[activeIndex]}
+    <>
+      <motion.div
+        className="notion-viewer-content"
         style={{
+          maxWidth: maxWidth > 0 ? `${maxWidth}px` : "100vw",
+          maxHeight: maxHeight > 0 ? `${maxHeight}px` : "90vh",
           transform: `scale(${scaleState.styleScale})`,
           transformOrigin: `${originState.originX * CONVERSION.PERCENT_FACTOR}% ${originState.originY * CONVERSION.PERCENT_FACTOR}%`,
-          cursor: isCursor ? getCursorStyle(scaleState.styleScale) : "none",
         }}
-        onClick={handleZoomInOut}
-        aria-label={`Image ${activeIndex + 1}/${imageUrls.length} at ${scaleState.displayScale}%`}
-        {...MOTION_STYLES}
-      />
-      {isViewerTools && (
+        onClick={zoomControls.handleZoomInOut}
+      >
+        <motion.img
+          ref={imageRef}
+          role="img"
+          tabIndex={0}
+          key={`${activeIndex}-${visibleImages[activeIndex]}-image`}
+          alt={caption}
+          src={visibleImages[activeIndex]}
+          aria-label={`Image ${activeIndex + 1}/${visibleImages.length} at ${scaleState.displayScale}%`}
+          style={{
+            cursor: isCursor ? getCursorStyle(scaleState.styleScale) : "none",
+          }}
+          {...MOTION_STYLES}
+        />
+      </motion.div>
+      {isTools && (
         <ViewerTools
           handleMouseLeave={handleMouseLeave}
           handleMouseEnter={handleMouseEnter}
@@ -148,7 +113,7 @@ const ViewerImage: React.FC<ViewerImageProps> = ({
             <ViewerTools.Navigation
               key={`${url}-navigation`}
               activeIndex={activeIndex}
-              totalImages={imageUrls.length}
+              totalImages={visibleImages.length}
               toPreviousImage={toPreviousImage}
               toNextImage={toNextImage}
             />
@@ -156,18 +121,20 @@ const ViewerImage: React.FC<ViewerImageProps> = ({
           <ViewerTools.Scaler
             key={`${url}-scaler`}
             isFocus={isFocus}
-            lastMousePosition={lastMousePosition}
             scaleState={scaleState}
             scaleDispatch={scaleDispatch}
             originDispatch={originDispatch}
             setIsFocus={setIsFocus}
             zoomControls={zoomControls}
           />
-          <ViewerTools.Download key={`${url}-download`} url={url} />
+          <ViewerTools.Download
+            key={`${url}-download`}
+            url={visibleImages[activeIndex]}
+          />
           <ViewerTools.Close key={`${url}-close`} close={close} />
         </ViewerTools>
       )}
-    </div>
+    </>
   );
 };
 

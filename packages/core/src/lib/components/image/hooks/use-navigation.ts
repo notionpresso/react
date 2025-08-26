@@ -1,44 +1,44 @@
 "use client";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useState } from "react";
+import { OriginAction, ScaleAction } from "../reducer";
+import { getClickedImageIndex } from "../lib";
 
 export const NAVIGATION = {
-  START_INDEX: 0,
   MIN_INDEX: 0,
-
+  MAX_INDEX_OFFSET: 1,
   NEXT_STEP: 1,
   PREV_STEP: -1,
-
-  FIRST_INDEX: 0,
-  LAST_INDEX_OFFSET: 1,
 } as const;
 
-export const useNavigation = (url: string, imageUrls: string[]) => {
+export const useNavigation = (
+  url: string,
+  visibleImages: string[],
+  scaleDispatch: React.Dispatch<ScaleAction>,
+  originDispatch: React.Dispatch<OriginAction>,
+) => {
   const [activeIndex, setActiveIndex] = useState(() => {
-    const index = imageUrls.findIndex((imgUrl) => imgUrl === url);
-    return Math.max(NAVIGATION.MIN_INDEX, index);
+    const clickedIndex = getClickedImageIndex(url);
+    return Math.max(NAVIGATION.MIN_INDEX, clickedIndex);
   });
 
   const toNextImage = useCallback(() => {
-    setActiveIndex((prev) =>
+    setActiveIndex((prevActiveIndex) =>
       Math.min(
-        prev + NAVIGATION.NEXT_STEP,
-        imageUrls.length - NAVIGATION.LAST_INDEX_OFFSET,
+        prevActiveIndex + NAVIGATION.NEXT_STEP,
+        visibleImages.length - NAVIGATION.MAX_INDEX_OFFSET,
       ),
     );
-  }, [imageUrls.length]);
+    scaleDispatch({ type: "reset" });
+    originDispatch({ type: "reset" });
+  }, [visibleImages.length, scaleDispatch, originDispatch]);
 
   const toPreviousImage = useCallback(() => {
-    setActiveIndex((prev) =>
-      Math.max(prev + NAVIGATION.PREV_STEP, NAVIGATION.MIN_INDEX),
+    setActiveIndex((prevActiveIndex) =>
+      Math.max(prevActiveIndex + NAVIGATION.PREV_STEP, NAVIGATION.MIN_INDEX),
     );
-  }, []);
-
-  useEffect(() => {
-    if (imageUrls.length > NAVIGATION.MIN_INDEX) {
-      const index = imageUrls.findIndex((findUrl) => findUrl === url);
-      setActiveIndex(Math.max(NAVIGATION.MIN_INDEX, index));
-    }
-  }, [imageUrls, url]);
+    scaleDispatch({ type: "reset" });
+    originDispatch({ type: "reset" });
+  }, [scaleDispatch, originDispatch]);
 
   return {
     activeIndex,

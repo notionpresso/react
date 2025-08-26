@@ -1,14 +1,14 @@
 "use client";
 import { useState, useEffect } from "react";
 
-import { getVisibleImages } from "../lib/get-visible-images";
+import { getVisibleImages } from "../lib";
 
 export const useImages = () => {
-  const [imageUrls, setImageUrls] = useState<string[]>([]);
+  const [visibleImages, setVisibleImages] = useState<string[]>([]);
 
   useEffect(() => {
-    setImageUrls(getVisibleImages());
+    setVisibleImages(getVisibleImages());
   }, []);
 
-  return imageUrls;
+  return visibleImages;
 };

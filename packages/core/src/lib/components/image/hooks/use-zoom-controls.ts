@@ -2,18 +2,14 @@
 import { useCallback } from "react";
 
 import {
-  initialOrigin,
   initialScale,
   type OriginAction,
   type ScaleAction,
+  DISPLAY as DISPLAY_STYLE,
 } from "../reducer";
-
-const MAX_ZOOM_IN_THRESHOLD = 150;
-const ZOOM_OUT_THRESHOLD = 100;
 
 interface UseZoomControlsProps {
   scaleState: typeof initialScale;
-  lastMousePosition: typeof initialOrigin;
   originDispatch: React.Dispatch<OriginAction>;
   scaleDispatch: React.Dispatch<ScaleAction>;
 }
@@ -21,41 +17,62 @@ interface UseZoomControlsProps {
 export interface UseZoomControls {
   handleZoomIn: () => void;
   handleZoomOut: () => void;
+  handleZoomInOut: (event: React.MouseEvent<HTMLImageElement>) => void;
 }
 
 export const useZoomControls = ({
   scaleState,
   originDispatch,
-  lastMousePosition,
   scaleDispatch,
-}: UseZoomControlsProps): UseZoomControls => {
+}: UseZoomControlsProps) => {
   const handleZoomIn = useCallback(() => {
-    if (scaleState.displayScale > MAX_ZOOM_IN_THRESHOLD) {
+    if (scaleState.displayScale <= DISPLAY_STYLE.INITIAL) {
       originDispatch({ type: "reset" });
     }
-
     scaleDispatch({ type: "zoomIn" });
   }, [scaleState.displayScale, originDispatch, scaleDispatch]);
 
   const handleZoomOut = useCallback(() => {
-    if (scaleState.displayScale > ZOOM_OUT_THRESHOLD) {
-      originDispatch({
-        type: "zoomInOut",
-        payload: lastMousePosition,
-      });
-    } else {
+    if (scaleState.displayScale <= DISPLAY_STYLE.INITIAL) {
       originDispatch({ type: "reset" });
     }
+
     scaleDispatch({ type: "zoomOut" });
-  }, [
-    scaleState.displayScale,
-    originDispatch,
-    lastMousePosition,
-    scaleDispatch,
-  ]);
+  }, [scaleState.displayScale, originDispatch, scaleDispatch]);
+
+  const handleZoomInOut = useCallback(
+    (event: React.MouseEvent<HTMLImageElement>) => {
+      const { width, height, top, left } =
+        event.currentTarget.getBoundingClientRect();
+      const currentMouseX = (event.clientX - left) / width;
+      const currentMouseY = (event.clientY - top) / height;
+
+      const isZoomIn = scaleState.displayScale <= DISPLAY_STYLE.INITIAL;
+      const isZoomMin = scaleState.displayScale > DISPLAY_STYLE.MIN;
+      const isZoomMax = scaleState.displayScale >= DISPLAY_STYLE.MAX;
+
+      if (isZoomIn) {
+        if (isZoomMin) {
+          originDispatch({
+            type: "zoomInOut",
+            payload: { originX: currentMouseX, originY: currentMouseY },
+          });
+        }
+        scaleDispatch({ type: "zoomIn" });
+      } else {
+        if (isZoomMax) {
+          scaleDispatch({ type: "reset" });
+        } else {
+          scaleDispatch({ type: "zoomOut" });
+        }
+      }
+    },
+    [originDispatch, scaleDispatch, scaleState.displayScale],
+  );
 
   return {
     handleZoomIn,
     handleZoomOut,
+    handleZoomInOut,
   };
 };
