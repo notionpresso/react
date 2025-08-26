@@ -21,6 +21,7 @@ export const DISPLAY = {
   INITIAL: 100,
   STEP: 50,
   MIN: 50,
+  MIDDLE: 150,
   MAX: 200,
 };
 
