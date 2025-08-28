@@ -1,4 +1,4 @@
-export const handleDownload = (url: string) => {
+export const handleDownload = (url: string): void => {
   const xhr = new XMLHttpRequest();
   xhr.open("GET", url);
   xhr.responseType = "blob";

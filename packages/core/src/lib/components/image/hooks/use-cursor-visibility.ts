@@ -2,7 +2,13 @@
 
 import { useState, useRef, useCallback, useEffect } from "react";
 
-export const useCursorVisibility = () => {
+interface UseCursorVisibilityReturn {
+  isCursor: boolean;
+  handleMouseLeave: () => void;
+  handleMouseEnter: () => void;
+}
+
+export const useCursorVisibility = (): UseCursorVisibilityReturn => {
   const [isCursor, setIsCursor] = useState(true);
   const [isOverTools, setIsOverTools] = useState(false);
   const cursorTimeOutRef = useRef<NodeJS.Timeout>();

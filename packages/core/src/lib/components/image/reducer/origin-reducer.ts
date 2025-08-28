@@ -10,17 +10,19 @@ export const initialOrigin = {
   originY: ORIGIN.INITIAL_Y,
 } as const;
 
+export type OriginState = typeof initialOrigin;
+
 type OriginActionType = "zoomInOut" | "reset";
 
 export type OriginAction = {
   type: OriginActionType;
-  payload?: typeof initialOrigin;
+  payload?: OriginState;
 };
 
 export const originReducer = (
-  state: typeof initialOrigin,
+  state: OriginState,
   action: OriginAction,
-) => {
+): OriginState => {
   switch (action.type) {
     case "reset":
       return {

@@ -2,21 +2,6 @@
 
 import { normalizeDisplayScale } from "../lib";
 
-type ScaleActionType =
-  | "enter"
-  | "blur"
-  | "zoomInOut"
-  | "zoomIn"
-  | "zoomOut"
-  | "reset"
-  | "changeStyleOnly"
-  | "changeDisplayOnly";
-
-export type ScaleAction = {
-  type: ScaleActionType;
-  payload?: number;
-};
-
 export const DISPLAY = {
   INITIAL: 100,
   STEP: 50,
@@ -42,10 +27,27 @@ export const initialScale = {
   styleScale: STYLE.INITIAL,
 } as const;
 
+export type ScaleState = typeof initialScale;
+
+type ScaleActionType =
+  | "enter"
+  | "blur"
+  | "zoomInOut"
+  | "zoomIn"
+  | "zoomOut"
+  | "reset"
+  | "changeStyleOnly"
+  | "changeDisplayOnly";
+
+export type ScaleAction = {
+  type: ScaleActionType;
+  payload?: number;
+};
+
 export const scaleReducer = (
-  state: typeof initialScale,
+  state: ScaleState,
   action: ScaleAction,
-) => {
+): ScaleState => {
   switch (action.type) {
     case "changeStyleOnly": {
       const invalidStyleScale = action.payload ?? state.displayScale;

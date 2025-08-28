@@ -9,7 +9,7 @@ import {
   isSafari,
 } from "../lib";
 
-interface ImageMaxSize {
+interface ImageMaxSizeReturn {
   maxWidth: number;
   maxHeight: number;
 }
@@ -17,8 +17,8 @@ interface ImageMaxSize {
 export const useImageSize = (
   imageRef: RefObject<HTMLImageElement>,
   activeIndex: number,
-): ImageMaxSize => {
-  const [maxSize, setMaxSize] = useState<ImageMaxSize>({
+): ImageMaxSizeReturn => {
+  const [maxSize, setMaxSize] = useState<ImageMaxSizeReturn>({
     maxWidth: 0,
     maxHeight: 0,
   });

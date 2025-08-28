@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 
 import { getVisibleImages } from "../lib";
 
-export const useImages = () => {
+export const useImages = (): string[] => {
   const [visibleImages, setVisibleImages] = useState<string[]>([]);
 
   useEffect(() => {

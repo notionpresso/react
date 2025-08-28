@@ -1,10 +1,10 @@
 "use client";
 import { useEffect } from "react";
-import type { UseZoomControls } from "./use-zoom-controls";
+import type { UseZoomControlsReturn } from "./use-zoom-controls";
 
 interface UseKeydownProps {
   close: () => void;
-  zoomControls: UseZoomControls;
+  zoomControls: UseZoomControlsReturn;
   toPreviousImage: () => void;
   toNextImage: () => void;
 }
@@ -14,7 +14,7 @@ export const useKeydown = ({
   zoomControls,
   toPreviousImage,
   toNextImage,
-}: UseKeydownProps) => {
+}: UseKeydownProps): void => {
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       const keyDownEvents: { [key: string]: () => void } = {

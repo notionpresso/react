@@ -1,12 +1,12 @@
 "use client";
 import React, { useEffect, useRef } from "react";
 import {
-  initialScale,
-  OriginAction,
+  type ScaleState,
+  type OriginAction,
   type ScaleAction,
   DISPLAY as DISPLAY_STYLE,
 } from "./reducer";
-import type { UseZoomControls } from "./hooks/use-zoom-controls";
+import type { UseZoomControlsReturn } from "./hooks/use-zoom-controls";
 import ToolsTooltip from "./tools-tooltip";
 import { Icons } from "./icons";
 import {
@@ -16,12 +16,12 @@ import {
 } from "./constants";
 
 export interface ToolsScalerProps {
-  scaleState: typeof initialScale;
+  scaleState: ScaleState;
   scaleDispatch: React.Dispatch<ScaleAction>;
   originDispatch: React.Dispatch<OriginAction>;
   isFocus: boolean;
   setIsFocus: React.Dispatch<React.SetStateAction<boolean>>;
-  zoomControls: UseZoomControls;
+  zoomControls: UseZoomControlsReturn;
 }
 
 const ToolsScaler: React.FC<ToolsScalerProps> = ({

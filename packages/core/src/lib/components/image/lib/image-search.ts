@@ -11,7 +11,7 @@ export const getVisibleImages = (): string[] => {
   );
 };
 
-export const getClickedImageIndex = (clickedUrl: string) => {
+export const getClickedImageIndex = (clickedUrl: string): number => {
   const visibleImages = getVisibleImages();
   const normalizedClickedUrl = normalizeUrl(clickedUrl);
 

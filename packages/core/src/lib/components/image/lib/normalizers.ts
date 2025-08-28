@@ -3,7 +3,7 @@ export const normalizeDisplayScale = (scale: number) => {
   return Math.min(Math.max(roundedScale, 50), 200);
 };
 
-export const normalizeUrl = (url: string) => {
+export const normalizeUrl = (url: string): string => {
   if (url.startsWith("http://") || url.startsWith("https://")) {
     try {
       const urlObj = new URL(url);

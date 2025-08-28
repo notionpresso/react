@@ -2,19 +2,19 @@
 import { useCallback } from "react";
 
 import {
-  initialScale,
+  type ScaleState,
   type OriginAction,
   type ScaleAction,
   DISPLAY as DISPLAY_STYLE,
 } from "../reducer";
 
 interface UseZoomControlsProps {
-  scaleState: typeof initialScale;
+  scaleState: ScaleState;
   originDispatch: React.Dispatch<OriginAction>;
   scaleDispatch: React.Dispatch<ScaleAction>;
 }
 
-export interface UseZoomControls {
+export interface UseZoomControlsReturn {
   handleZoomIn: () => void;
   handleZoomOut: () => void;
   handleZoomInOut: (event: React.MouseEvent<HTMLImageElement>) => void;
@@ -24,7 +24,7 @@ export const useZoomControls = ({
   scaleState,
   originDispatch,
   scaleDispatch,
-}: UseZoomControlsProps) => {
+}: UseZoomControlsProps): UseZoomControlsReturn => {
   const handleZoomIn = useCallback(() => {
     if (scaleState.displayScale <= DISPLAY_STYLE.INITIAL) {
       originDispatch({ type: "reset" });

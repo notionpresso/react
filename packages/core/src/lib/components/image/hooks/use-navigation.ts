@@ -10,12 +10,18 @@ export const NAVIGATION = {
   PREV_STEP: -1,
 } as const;
 
+interface UseNavigationReturn {
+  activeIndex: number;
+  toNextImage: () => void;
+  toPreviousImage: () => void;
+}
+
 export const useNavigation = (
   url: string,
   visibleImages: string[],
   scaleDispatch: React.Dispatch<ScaleAction>,
   originDispatch: React.Dispatch<OriginAction>,
-) => {
+): UseNavigationReturn => {
   const [activeIndex, setActiveIndex] = useState(() => {
     const clickedIndex = getClickedImageIndex(url);
     return Math.max(NAVIGATION.MIN_INDEX, clickedIndex);

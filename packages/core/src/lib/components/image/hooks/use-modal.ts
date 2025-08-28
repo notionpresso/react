@@ -1,7 +1,13 @@
 "use client";
 import { useState } from "react";
 
-export const useModal = () => {
+interface UseModalReturn {
+  isOpen: boolean;
+  open: () => void;
+  close: () => void;
+}
+
+export const useModal = (): UseModalReturn => {
   const [isOpen, setIsOpen] = useState(false);
 
   const open = () => setIsOpen(true);

@@ -14,7 +14,7 @@ const zeroGap = {
 
 const MIN_GAP = 0;
 
-const parse = (x: string | null) => parseInt(x || "", 10) || 0;
+const parse = (x: string | null): number => parseInt(x || "", 10) || 0;
 
 export const getOffset = (): number[] => {
   if (typeof window === "undefined" || typeof document === "undefined") {
@@ -50,7 +50,7 @@ export const getGapWidth = (): GapOffset => {
   };
 };
 
-export const getGapStyles = ({ gap }: GapOffset) => {
+export const getGapStyles = ({ gap }: GapOffset): string => {
   if (typeof window === "undefined" || typeof document === "undefined") {
     return "";
   }

@@ -1,4 +1,4 @@
-export const isSafari = () =>
+export const isSafari = (): boolean =>
   /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
-export const supportsIntersectionObserver = () =>
+export const supportsIntersectionObserver = (): boolean =>
   "IntersectionObserver" in window;

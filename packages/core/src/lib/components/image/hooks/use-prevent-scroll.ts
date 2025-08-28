@@ -3,7 +3,7 @@ import { useEffect } from "react";
 
 import { getGapStyles, getGapWidth } from "../lib";
 
-export const usePreventScroll = () => {
+export const usePreventScroll = (): void => {
   useEffect(() => {
     const styleElement = document.createElement("style");
 

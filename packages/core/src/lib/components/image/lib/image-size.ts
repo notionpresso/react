@@ -5,7 +5,12 @@ import {
   PORTRAIT_RATIOS,
 } from "../constants";
 
-export const getViewport = () => {
+interface Viewport {
+  width: number;
+  height: number;
+}
+
+export const getViewport = (): Viewport => {
   if (window.visualViewport?.width) {
     return {
       width: Math.round(window.visualViewport.width),
@@ -18,6 +23,17 @@ export const getViewport = () => {
     height: Math.round(document.documentElement.clientHeight ?? 0),
   };
 };
+
+const getNormalizedWidthProgress = (
+  viewportWidth: number,
+  minWidth: number,
+  maxWidth: number,
+): number => {
+  if (maxWidth === minWidth) return 0;
+  const progress = (viewportWidth - minWidth) / (maxWidth - minWidth);
+  return Math.min(1, Math.max(0, progress));
+};
+
 const getRatio = (aspectRatio: number, viewportWidth: number): number => {
   const isPortrait = aspectRatio < 1.0;
   const ratios = isPortrait ? PORTRAIT_RATIOS : LANDSCAPE_RATIOS;
@@ -27,24 +43,33 @@ const getRatio = (aspectRatio: number, viewportWidth: number): number => {
   }
 
   if (viewportWidth >= BREAKPOINTS.TABLET) {
-    const t =
-      (viewportWidth - BREAKPOINTS.TABLET) /
-      (BREAKPOINTS.DESKTOP - BREAKPOINTS.TABLET);
-    return ratios.TABLET + t * (ratios.DESKTOP - ratios.TABLET);
+    const tabletToDesktop = getNormalizedWidthProgress(
+      viewportWidth,
+      BREAKPOINTS.TABLET,
+      BREAKPOINTS.DESKTOP,
+    );
+    return ratios.TABLET + tabletToDesktop * (ratios.DESKTOP - ratios.TABLET);
   }
 
-  const t =
-    (viewportWidth - BREAKPOINTS.MOBILE) /
-    (BREAKPOINTS.TABLET - BREAKPOINTS.MOBILE);
-  return ratios.MOBILE + t * (ratios.TABLET - ratios.MOBILE);
+  const mobileToTablet = getNormalizedWidthProgress(
+    viewportWidth,
+    BREAKPOINTS.MOBILE,
+    BREAKPOINTS.TABLET,
+  );
+  return ratios.MOBILE + mobileToTablet * (ratios.TABLET - ratios.MOBILE);
 };
+
+interface MaxSize {
+  maxWidth: number;
+  maxHeight: number;
+}
 
 export const getMaxSize = (
   naturalWidth: number,
   naturalHeight: number,
   viewportWidth: number,
   viewportHeight: number,
-) => {
+): MaxSize => {
   const aspectRatio = naturalWidth / naturalHeight;
 
   if (viewportWidth <= BREAKPOINTS.MOBILE) {
