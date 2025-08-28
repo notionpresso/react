@@ -1,6 +1,8 @@
 export const Close = () => {
   return (
     <svg
+      aria-hidden="true"
+      focusable="false"
       width="40"
       height="40"
       viewBox="0 0 40 40"

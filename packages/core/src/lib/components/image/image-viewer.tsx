@@ -23,7 +23,13 @@ const ImageViewer: React.FC<ImageViewerProps> = ({ url, caption, close }) => {
 
   return (
     <AnimatePresence>
-      <motion.div className="notion-viewer-container" {...MOTION_STYLES}>
+      <motion.div
+        className="notion-viewer-container"
+        role="dialog"
+        aria-modal="true"
+        aria-label="Image Viewer"
+        {...MOTION_STYLES}
+      >
         <ViewerOverlay
           key={`${url}-overlay`}
           close={close}

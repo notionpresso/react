@@ -2,6 +2,7 @@ export const Download = () => {
   return (
     <svg
       aria-hidden="true"
+      focusable="false"
       role="graphics-symbol"
       viewBox="0 0 16 16"
       className="download"

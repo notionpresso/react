@@ -7,11 +7,10 @@ const MOTION_VARIANTS = {
   visible: { opacity: 1, y: 0 },
 };
 
-interface AriaProps {
+interface Aria {
   label: string;
-  disabled?: boolean;
-  describedby?: string;
-  controls?: string;
+  describedby: string;
+  hint: string;
 }
 
 interface ToolsTooltipProps {
@@ -20,16 +19,18 @@ interface ToolsTooltipProps {
   icon: React.ReactNode;
   hint?: string;
   onClick: () => void;
-  aria: AriaProps;
+  disabled?: boolean;
+  aria: Aria;
 }
 
 const ToolsTooltip: React.FC<ToolsTooltipProps> = ({
   className,
+  onClick,
   content,
   hint,
-  aria,
-  onClick,
   icon,
+  disabled,
+  aria,
 }) => {
   const [isVisible, setIsVisible] = useState(false);
 
@@ -43,19 +44,19 @@ const ToolsTooltip: React.FC<ToolsTooltipProps> = ({
       className="notion-viewer-tooltip-container"
     >
       <button
-        aria-label={aria.label}
-        aria-disabled={aria.disabled}
-        aria-describedby={aria.describedby}
-        aria-controls={aria.controls}
-        role="button"
-        tabIndex={0}
-        disabled={aria.disabled}
-        onClick={onClick}
+        type="button"
         className={className}
+        aria-label={aria?.label}
+        disabled={disabled}
+        onClick={onClick}
+        aria-describedby={aria?.describedby}
       >
         {icon}
       </button>
-      {!aria.disabled && (
+      <span id={aria?.describedby} className="notion-sr-only">
+        {aria?.hint}
+      </span>
+      {!disabled && (
         <AnimatePresence>
           {isVisible && (
             <motion.div

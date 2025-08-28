@@ -6,3 +6,4 @@ export * from "./image-search";
 export * from "./image-size";
 export * from "./normalizers";
 export * from "./resize-listener";
+export * from "./zoom-announcer";

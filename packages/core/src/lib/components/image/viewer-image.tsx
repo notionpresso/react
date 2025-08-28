@@ -44,6 +44,7 @@ const ViewerImage: React.FC<ViewerImageProps> = ({
   const imageRef = useRef<HTMLImageElement | null>(null);
 
   const [isFocus, setIsFocus] = useState(false);
+  const [announce, setAnnounce] = useState("");
 
   const visibleImages = useImages();
 
@@ -53,12 +54,18 @@ const ViewerImage: React.FC<ViewerImageProps> = ({
     initialOrigin,
   );
 
-  const { activeIndex, toNextImage, toPreviousImage } = useNavigation(
+  const handleAnnounce = (message: string) => {
+    setAnnounce(message);
+    setTimeout(() => setAnnounce(""), 0);
+  };
+
+  const { activeIndex, toNextImage, toPreviousImage } = useNavigation({
     url,
     visibleImages,
     scaleDispatch,
     originDispatch,
-  );
+    onAnnounce: handleAnnounce,
+  });
 
   const { maxWidth, maxHeight } = useImageSize(imageRef, activeIndex);
 
@@ -66,6 +73,7 @@ const ViewerImage: React.FC<ViewerImageProps> = ({
     scaleState,
     originDispatch,
     scaleDispatch,
+    onAnnounce: handleAnnounce,
   });
 
   useKeydown({
@@ -92,7 +100,6 @@ const ViewerImage: React.FC<ViewerImageProps> = ({
       >
         <motion.img
           ref={imageRef}
-          role="img"
           tabIndex={0}
           key={`${activeIndex}-${visibleImages[activeIndex]}-image`}
           alt={caption}
@@ -104,6 +111,9 @@ const ViewerImage: React.FC<ViewerImageProps> = ({
           {...MOTION_STYLES}
         />
       </motion.div>
+      <div aria-live="polite" className="notion-sr-only" role="status">
+        {announce}
+      </div>
       {isTools && (
         <ViewerTools
           handleMouseLeave={handleMouseLeave}
@@ -130,8 +140,13 @@ const ViewerImage: React.FC<ViewerImageProps> = ({
           <ViewerTools.Download
             key={`${url}-download`}
             url={visibleImages[activeIndex]}
+            onAnnounce={handleAnnounce}
           />
-          <ViewerTools.Close key={`${url}-close`} close={close} />
+          <ViewerTools.Close
+            key={`${url}-close`}
+            close={close}
+            onAnnounce={handleAnnounce}
+          />
         </ViewerTools>
       )}
     </>
