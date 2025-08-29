@@ -1,4 +1,6 @@
-export const getCursorStyle = (scale: number) => {
+type CursorStyle = "zoom-in" | "zoom-out";
+
+export const getCursorStyle = (scale: number): CursorStyle => {
   if (scale === 1) {
     return "zoom-in";
   } else if (scale > 1) {

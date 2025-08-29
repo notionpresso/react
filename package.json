@@ -1,6 +1,6 @@
 {
   "name": "@notionpresso/react",
-  "version": "0.0.1",
+  "version": "0.0.7",
   "description": "this is a react library for notionpresso",
   "main": "index.js",
   "scripts": {
