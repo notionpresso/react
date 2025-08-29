@@ -4,7 +4,7 @@ import type { ImageArgs } from "../../types";
 import RichText from "../internal/rich-text";
 import ImageViewer from "./image-viewer";
 import { useModal } from "./hooks";
-import { extractImageUrl, findImageCaption } from "./lib";
+import { extractImageUrl, findImageCaption, setImageLoading } from "./lib";
 
 type ImageProps = {
   children: React.ReactNode;
@@ -44,8 +44,12 @@ const Image: React.FC<ImageProps> = ({ children, ...props }) => {
             <img
               src={url}
               alt={caption[0]?.text?.content || DEFAULT_CAPTION}
+              width={800}
+              height={600}
               onClick={open}
               className="notion-viewer-opener"
+              loading="lazy"
+              ref={setImageLoading}
             />
           ) : (
             <p>unsupported type: {type}</p>
