@@ -21,5 +21,13 @@ export default defineConfig({
       external: ["react", "react/jsx-runtime"],
     },
     copyPublicDir: false,
+    output: {
+      assetFileNames: (assetInfo) => {
+        if (assetInfo.name.endsWith(".woff2")) {
+          return "fonts/[name][extname]";
+        }
+        return "assets/[name]-[hash][extname]";
+      },
+    },
   },
 });

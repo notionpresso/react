@@ -1,3 +1,47 @@
+@font-face {
+  font-family: "KaTeX_Main";
+  src: url("/fonts/KaTeX_Main-Regular.woff2") format("woff2");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "KaTeX_Math";
+  src: url("/fonts/KaTeX_Math-Italic.woff2") format("woff2");
+  font-weight: normal;
+  font-style: italic;
+  font-display: swap;
+}
+
+/* Basic KaTeX Styles */
+.katex {
+  font:
+    normal 1.21em KaTeX_Main,
+    Times New Roman,
+    serif;
+  line-height: 1.2;
+  text-indent: 0;
+  text-rendering: auto;
+}
+
+.katex-display {
+  display: block;
+  margin: 1em 0;
+  text-align: center;
+}
+
+.katex-math {
+  display: inline-block;
+}
+
+.katex .mathit {
+  font-family: KaTeX_Math;
+  font-style: italic;
+}
+
+/* Notion Styles */
+
 .notion * {
   box-sizing: border-box;
   margin-block-start: 0;
@@ -1306,25 +1350,4 @@
   margin-left: 5px;
   color: #d3d3d3;
   font-size: 13px;
-}
-
-.notion-block-fallback {
-  padding: 10px;
-  margin: 4px 0;
-  border-radius: 4px;
-  background-color: var(--notion-gray_background);
-}
-
-.notion-block-fallback-content {
-  font-size: 14px;
-  color: var(--fg-color-3);
-}
-
-.notion-block-fallback-type {
-  color: var(--notion-gray);
-  background-color: var(--notion-gray_background_co);
-  padding: 2px 6px;
-  border-radius: 3px;
-  margin-right: 6px;
-  font-family: monaco, "Andale Mono", "Ubuntu Mono", monospace;
 }

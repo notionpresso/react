@@ -1,7 +1,7 @@
 import React from "react";
-import { getColorCss, renderEquation } from "../../utils";
+import { getColorCss } from "../../utils";
 import type { TextArgs, EquationArgs } from "../../types";
-import { Helmet } from "react-helmet";
+import Equation from "../equation";
 
 function RichText({ props }: { props: TextArgs[] }) {
   if (props.length === 0) {
@@ -14,7 +14,11 @@ function RichText({ props }: { props: TextArgs[] }) {
         text.type === "text" ? (
           <Text key={index} props={text} />
         ) : (
-          <Equation key={index} props={text as unknown as EquationArgs} />
+          <Equation
+            key={index.toString()}
+            inline
+            {...(text as unknown as EquationArgs)}
+          />
         ),
       )}
     </>
@@ -69,26 +73,4 @@ function Text({ props }: { props: TextArgs }) {
   return <>{renderText(content)}</>;
 }
 
-function Equation({ props }: { props: EquationArgs }) {
-  const {
-    equation: { expression },
-  } = props;
-
-  return (
-    <>
-      <Helmet>
-        <link
-          rel="stylesheet"
-          href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css"
-          integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X"
-          crossOrigin="anonymous"
-        />
-      </Helmet>
-      <span
-        className="notion-equation notion-equation-inline"
-        dangerouslySetInnerHTML={{ __html: renderEquation(expression) }}
-      />
-    </>
-  );
-}
 export default RichText;
